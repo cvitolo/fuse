@@ -18,12 +18,25 @@ tools::checkRdaFiles('~/Dropbox/Repos/fuse/data/parameters.rda')
 tools::resaveRdaFiles(paths = '~/Dropbox/Repos/fuse/data/parameters.rda',
                       compress = 'gzip')
 
-# Run unit tests using testthat
-devtools::test('fuse')
-
-# Run R CMD check or devtools::check()
-devtools::check('fuse')
-
 # Create the Appveyor config file for continuous integration on Windows
 devtools::use_appveyor()
 # move the newly created appveyor.yml to the root directory and modify it
+
+# Create the travis config file for continuous integration on Linux-OSX
+devtools::use_travis()
+
+# Generate a template for a README.Rmd
+devtools::use_readme_rmd()
+
+# Generate a template for a Code of Conduct
+devtools::use_code_of_conduct()
+
+# Check spelling mistakes
+devtools::spell_check('fuse',
+                      ignore = c('metres', 'catalogue', 'DEFRA', 'EMEP',
+                                 'EPSG', 'WGS'))
+
+# Run R CMD check
+devtools::check('fuse')
+# The above will also run the unit tests using testthat
+# devtools::test('fuse')

@@ -4,3 +4,6 @@
 README.Rmd
 preparePackage.R
 ^appveyor\.yml$
+.travis.yml
+paper
+^CONDUCT\.md$
