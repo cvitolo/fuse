@@ -1,0 +1,12 @@
+citHeader("To cite the 'fuse' package in publications, please use:")
+
+citEntry(entry = "manual",
+  author = "Claudia Vitolo and Peter Wells and Martin Dobias and Wouter Buytaert",
+  title = "fuse: Framework for Understanding Structural Errors",
+  year = "2012",
+  note = "R package version 3.0.0",
+  url = "https://github.com/cvitolo/r_fuse",
+  doi = "http://dx.doi.org/10.5281/zenodo.14005",
+  textVersion = "Claudia Vitolo, Peter Wells, Martin Dobias and Wouter Buytaert (2016). fuse: Framework for Understanding Structural Errors. R package version 3.0.0
+  https://github.com/cvitolo/r_fuse, DOI: http://dx.doi.org/10.5281/zenodo.14005"
+)

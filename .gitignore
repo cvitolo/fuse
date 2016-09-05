@@ -31,3 +31,12 @@ vignettes/*.pdf
 # Temporary files created by R markdown
 *.utf8.md
 *.knit.md
+.Rproj.user
+
+# Old and obsolete test files
+/old/
+
+# Others
+fuse.Rproj
+README.html
+
