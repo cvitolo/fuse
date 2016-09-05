@@ -1,0 +1,87 @@
+### Summary
+
+-   What does this package do? (explain in 50 words or less):
+Fuse is an R package that implements the framework for hydrological modelling FUSE described in Clark et al. (2008) and based on the Fortran code kindly provided by Martyn Clark in 2011. The package consists of two modules: the soil moisture accounting module (fusesma.sim) and the gamma routing module (fuserouting.sim).
+The fuse framework takes as input rainfall and potential evapotranspiration time series (areal averages over the river catchment area) and returns a simulated time series of river discharges. It can be used to understand the variability of expected hydrological responses based on model structures.
+The package contains default parameter ranges (fusesma.ranges and fuserouting.ranges) and three data objects: DATA (sample input dataset), parameters (sample parameters) and modlist (list of FUSE model structures).
+
+-   Paste the full DESCRIPTION file inside a code block below:
+
+```
+Package: fuse
+Version: 3.0.0
+Title: Framework for Understanding Structural Errors
+Authors@R: c(person("Claudia", "Vitolo", role = c("aut", "cre"),
+                    email = "cvitolodev@gmail.com"),
+	           person("Peter", "Wells", role = "ctr"),
+	           person("Martin", "Dobias", role = "ctr"),
+	           person("Wouter", "Buytaert", role = "ths"))
+Author: Claudia Vitolo [aut, cre], Peter Wells [ctr], Martin Dobias [ctr],
+    Wouter Buytaert [ths]
+Maintainer: Claudia Vitolo <cvitolodev@gmail.com>
+Depends:
+    R (>= 3.1.0),
+    zoo,
+    tgp
+LinkingTo: BH, Rcpp
+Description: Implementation of the framework for hydrological modelling FUSE,
+    based on the Fortran version described in Clark et al. (2008). The package
+    consists of two modules: Soil Moisture Accounting module (\code{fuse.sim}) and
+    Gamma routing module (\code{routgamma.sim}). It also contains default parameter
+    ranges (see \code{fuse.ranges} and \code{routgamma.ranges}) and three data
+    objects: DATA, parameters and modlist.
+License: GPL (>= 3)
+Repository: GitHub
+URL: https://github.com/cvitolo/r_fuse
+BugReports: https://github.com/cvitolo/r_fuse/issues
+RoxygenNote: 5.0.1
+```
+
+-   URL for the package (the development repository, not a stylized html page):
+https://github.com/cvitolo/r_fuse
+
+-   Who is the target audience?
+Scientists and researchers interested in hydrological modelling.
+
+-   Are there other R packages that accomplish the same thing? If so, what is different about yours?
+No, as far as I know, this is the only implementation of the fuse framework in the R language.
+
+### Requirements
+
+Confirm each of the following by checking the box.  This package:
+
+- [x] does not violate the Terms of Service of any service it interacts with.
+- [x] has a CRAN and OSI accepted license.
+- [x] contains a README with instructions for installing the development version.
+- [x] includes documentation with examples for all functions.
+- [x] contains a vignette with examples of its essential functions and uses.
+- [x] has a test suite.
+- [x] has continuous integration with Travis CI and/or another service.
+
+#### Publication options
+
+- [x] Do you intend for this package to go on CRAN?
+- [x] Do you wish to automatically submit to the [Journal of Open Source Software](http://joss.theoj.org/)? If so:
+    - [x] The package contains a [`paper.md`](http://joss.theoj.org/about#paper_structure) with a high-level description.
+    - [x] The package is deposited in a long-term repository with the DOI:
+    http://dx.doi.org/10.5281/zenodo.59851
+
+### Detail
+
+- [x] Does `R CMD check` (or `devtools::check()`) succeed?  Paste and describe any errors or warnings:
+
+R CMD check succeeds with no ERRORs or WARNINGs. However there is 1 NOTE:
+* File ‘fuse/libs/fuse.so’:
+  Found ‘_ZSt4cout’, possibly from ‘std::cout’ (C++)
+    Object: ‘fuse.o’
+
+Compiled code should not call entry points which might terminate R nor
+write to stdout/stderr instead of to the console, nor the system RNG.
+
+I do not know how to modify the c++ code to fix this.
+
+- [x] Does the package conform to [rOpenSci packaging guidelines](https://github.com/ropensci/packaging_guide)? Please describe any exceptions:
+
+- If this is a resubmission following rejection, please explain the change in circumstances:
+
+- If possible, please provide recommendations of reviewers - those with experience with similar packages and/or likely users of your package - and their GitHub user names:

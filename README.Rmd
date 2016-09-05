@@ -1,7 +1,4 @@
 ---
-title: "README for the fuse package"
-author: "Claudia Vitolo"
-date: "`r Sys.Date()`"
 output:
   html_document: 
     keep_md: yes
