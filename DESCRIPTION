@@ -1,5 +1,5 @@
 Package: fuse
-Version: 3.0.1
+Version: 3.1
 Title: Framework for Understanding Structural Errors
 Authors@R: c(person("Claudia", "Vitolo", role = c("aut", "cre"),
                     email = "cvitolodev@gmail.com"),
