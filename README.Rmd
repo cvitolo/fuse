@@ -1,7 +1,7 @@
 ---
 output:
   github_document: 
-  toc: true
+    toc: true
 ---
 
 ```{r echo=FALSE}
