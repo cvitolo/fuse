@@ -42,9 +42,8 @@ fuserouting.sim <- function(U, mid, deltim, timedelay) {
    inAttr <- attributes(U)
    U <- zoo::coredata(U)
 
-   # load list of availabe models
-   load(system.file("data/modlist.rda", package = "fuse"))
-   modlist <- modlist # to remove NOTE in R CMD check
+   # list of availabe models is loaded by LazyData: true in DESCRIPTION
+   modlist <- modlist                            # to remove NOTE in R CMD check
 
    # Read model structure
    smodl <- c(modlist[mid,2],    # rferr

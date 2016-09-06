@@ -2,6 +2,7 @@
 ^\.Rproj\.user$
 
 README.Rmd
+README_cache
 preparePackage.R
 ^appveyor\.yml$
 .travis.yml

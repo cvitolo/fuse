@@ -8,6 +8,7 @@
 #' @importFrom zoo coredata
 #' @importFrom tgp lhs
 #' @importFrom stats runif
+#' @importFrom utils data
 #'
 #' @useDynLib fuse
 #'

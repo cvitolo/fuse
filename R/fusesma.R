@@ -88,9 +88,8 @@ fusesma.sim <- function(DATA, mid, deltim,
     #P[bad] <- 0
     #E[bad] <- 0
 
-    # load list of availabe models
-    load(system.file("data/modlist.rda", package = "fuse"))
-    modlist <- modlist                          # to remove NOTE in R CMD check
+    # list of availabe models is loaded by LazyData: true in DESCRIPTION
+    modlist <- modlist                           # to remove NOTE in R CMD check
 
     # Make sure mid is an integer (needed for compatibility with hydromad)
     mid <- round(mid,0)

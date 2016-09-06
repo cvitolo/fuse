@@ -1,26 +1,26 @@
 Package: fuse
-Version: 3.1
 Title: Framework for Understanding Structural Errors
+Version: 3.1
 Authors@R: c(person("Claudia", "Vitolo", role = c("aut", "cre"),
                     email = "cvitolodev@gmail.com"),
 	           person("Peter", "Wells", role = "ctr"),
 	           person("Martin", "Dobias", role = "ctr"),
 	           person("Wouter", "Buytaert", role = "ths"))
-Author: Claudia Vitolo [aut, cre], Peter Wells [ctr], Martin Dobias [ctr],
-    Wouter Buytaert [ths]
 Maintainer: Claudia Vitolo <cvitolodev@gmail.com>
-Depends: R (>= 3.1.0)
-Imports: zoo, tgp, stats
-LinkingTo: BH, Rcpp
-Suggests: testthat
+URL: https://github.com/cvitolo/fuse
+BugReports: https://github.com/cvitolo/fuse/issues
 Description: Implementation of the framework for hydrological modelling FUSE,
     based on the Fortran version described in Clark et al. (2008). The package
     consists of two modules: Soil Moisture Accounting module (\code{fuse.sim}) and
     Gamma routing module (\code{routgamma.sim}). It also contains default parameter
     ranges (see \code{fuse.ranges} and \code{routgamma.ranges}) and three data
     objects: DATA, parameters and modlist.
-License: GPL (>= 3)
+Depends: R (>= 3.1.0)
+Imports: zoo, tgp, stats
+LinkingTo: BH, Rcpp
+Suggests: testthat
+LazyData: true
+Encoding: UTF-8
+License: GPL-3
 Repository: GitHub
-URL: https://github.com/cvitolo/r_fuse
-BugReports: https://github.com/cvitolo/r_fuse/issues
 RoxygenNote: 5.0.1

@@ -1,7 +1,7 @@
 ---
 title: 'fuse: An R package for ensemble Hydrological Modelling'
 bibliography: paper.bib
-date: "8 August 2016"
+date: 6 September 2016
 tags:
 - hydrological modelling
 - R
