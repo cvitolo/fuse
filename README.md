@@ -1,28 +1,22 @@
 
-
-
 <!-- Edit the README.Rmd only!!! The README.md is generated automatically from README.Rmd. -->
-
 fuse: Framework for Understanding Structural Errors (Hydrological Modelling)
----------------
+----------------------------------------------------------------------------
 
-[![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.14005.svg)](http://dx.doi.org/10.5281/zenodo.14005)
-[![Build Status](https://travis-ci.org/cvitolo/fuse.svg)](https://travis-ci.org/cvitolo/fuse.svg?branch=master)
-[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/cvitolo/fuse?branch=master&svg=true)](https://ci.appveyor.com/project/cvitolo/fuse)
-[![codecov.io](https://codecov.io/github/cvitolo/fuse/coverage.svg?branch=master)](https://codecov.io/github/cvitolo/fuse?branch=master)
+[![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.14005.svg)](http://dx.doi.org/10.5281/zenodo.14005) [![status](http://joss.theoj.org/papers/392a55daada04a86f95eaa8da134a28d/status.svg)](http://joss.theoj.org/papers/392a55daada04a86f95eaa8da134a28d) [![Build Status](https://travis-ci.org/cvitolo/fuse.svg)](https://travis-ci.org/cvitolo/fuse.svg?branch=master) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/cvitolo/fuse?branch=master&svg=true)](https://ci.appveyor.com/project/cvitolo/fuse) [![codecov.io](https://codecov.io/github/cvitolo/fuse/coverage.svg?branch=master)](https://codecov.io/github/cvitolo/fuse?branch=master)
 
 Implementation of the framework for hydrological modelling FUSE described in Clark et al. (2008) and based on the Fortran code provided by M. Clark in 2011. The package consists of two modules: Soil Moisture Accounting module (fusesma.sim) and Gamma routing module (fuserouting.sim). It also contains default parameter ranges (fusesma.ranges and fuserouting.ranges) and three data objects: DATA (sample input dataset), parameters (sample parameters) and modlist (list of FUSE model structures).
 
-
 Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
 
-## Dependencies & installation instructions
+Dependencies & installation instructions
+----------------------------------------
 
 ### Dependencies
+
 The rdefra package depends on a number of CRAN packages. Check for missing dependencies and install them:
 
-
-```r
+``` r
 packs <- c('zoo', 'tgp', 'devtools')
 new.packages <- packs[!(packs %in% installed.packages()[,"Package"])]
 if(length(new.packages)) install.packages(new.packages)
@@ -32,29 +26,29 @@ if(length(new.packages)) install.packages(new.packages)
 
 You can install this package from Github with [devtools](https://github.com/hadley/devtools):
 
-
-```r
+``` r
 devtools::install_github("cvitolo/fuse")
 ```
 
 Load the rdefra package:
 
-
-```r
+``` r
 library(fuse)
 ```
 
-## Sample data and parameters
+Sample data and parameters
+--------------------------
+
 Load sample data (daily time step)
 
-```r
+``` r
 data(DATA)
 myDELTIM <- 1
 ```
 
 Define parameter ranges
 
-```r
+``` r
 DefaultRanges <- data.frame(t(data.frame(c(fusesma.ranges(),
                                            fuserouting.ranges()))))
 names(DefaultRanges) <- c("Min","Max")
@@ -62,7 +56,7 @@ names(DefaultRanges) <- c("Min","Max")
 
 Sample parameter set using Latin Hypercube method
 
-```r
+``` r
 numberOfRuns <- 100
 parameters <- lhs( numberOfRuns, as.matrix(DefaultRanges) )
 parameters <- data.frame(parameters)
@@ -71,30 +65,32 @@ names(parameters) <- row.names(DefaultRanges)
 
 Alternatively, sample parameter set using built-in function
 
-```r
+``` r
 parameters <- generateParameters(100)
 ```
 
-## Applications
+Applications
+------------
 
 ### Example usage with 1 model structure
+
 Define the model to use, e.g. TOPMODEL (MID = 60)
 
-```r
+``` r
 myMID <- 60
 ```
 
 Use the built-in function to run FUSE for the 1st sampled parameter set
 
-```r
+``` r
 x <- fuse(DATA, myMID, myDELTIM, parameters[1,])
 
 plot(x,xlab="",ylab="Streamflow [mm/day]")
 ```
 
-Run FUSE for all the sampled parameter sets 
+Run FUSE for all the sampled parameter sets
 
-```r
+``` r
 plot(DATA$Q,type="l",xlab="",ylab="Streamflow [mm/day]")
 allQ <- data.frame(matrix(NA,ncol=numberOfRuns,nrow=dim(DATA)[1]))
 for (i in 1:numberOfRuns){
@@ -105,15 +101,16 @@ lines(DATA$Q,col="black")
 ```
 
 ### Ensemble modelling
+
 Define a group of model structures to use
 
-```r
+``` r
 mids <- c(60, 230, 342, 426)
 ```
- 
+
 Run a multi-model calibration using the Nash-Sutcliffe efficiency as objective function
 
-```r
+``` r
 library(qualV)
 indices <- rep(NA,4*numberOfRuns)
 discharges <- matrix(NA,ncol=4*numberOfRuns,nrow=dim(DATA)[1])
@@ -139,7 +136,7 @@ for (m in 1:4){
 
 Compare results
 
-```r
+``` r
 bestRun <- which(indices == max(indices))
  
 bestModel <- function(runNumber){
@@ -163,7 +160,7 @@ lines(discharges[,bestRun],col="red", lwd=1)
 
 How the best simulation of each model structure compare to each other?
 
-```r
+``` r
 bestRun0060 <- which(indices[1:numberOfRuns] == max(indices[1:numberOfRuns]))
 bestRun0230 <- numberOfRuns + which(indices[(numberOfRuns+1):(2*numberOfRuns)] == max(indices[(numberOfRuns+1):(2*numberOfRuns)]))
 bestRun0342 <- 2*numberOfRuns + which(indices[(2*numberOfRuns+1):(3*numberOfRuns)] == max(indices[(2*numberOfRuns+1):(3*numberOfRuns)]))
@@ -181,12 +178,12 @@ legend("top",
         lty = c(1, 1, 1, 1))
 ```
 
-## Use fuse with hydromad
+Use fuse with hydromad
+----------------------
 
 [Hydromad](http://hydromad.catchment.org/) is an excellent framework for hydrological modelling, optimization, sensitivity analysis and assessment of results. It contains a large set of soil moisture accounting modules and routing functions. Thanks to Joseph Guillaume (hydromad’s maintainer), fuse is now compatible with hydromad and below are some examples Joseph provided to use fuse within the hydromad environment.
 
-
-```r
+``` r
 # Install and load hydromad
 install.packages(c("zoo", "latticeExtra", "polynom", "car", 
                    "Hmisc", "reshape", "DEoptim", "coda"))
@@ -237,8 +234,9 @@ modfit <- fitBySCE(modspec)
 summary(modfit)
 ```
 
-## Meta
+Meta
+----
 
-* Please [report any issues or bugs](https://github.com/cvitolo/fuse/issues).
-* License: [GPL-3](https://opensource.org/licenses/GPL-3.0)
-* Get citation information for the `fuse` package in R doing `citation(package = 'fuse')`
+-   Please [report any issues or bugs](https://github.com/cvitolo/fuse/issues).
+-   License: [GPL-3](https://opensource.org/licenses/GPL-3.0)
+-   Get citation information for the `fuse` package in R doing `citation(package = 'fuse')`
