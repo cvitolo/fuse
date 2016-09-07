@@ -12,6 +12,18 @@ install:
 
 # Adapt as necessary starting from here
 
+environment:
+  global:
+    WARNINGS_ARE_ERRORS: 1
+    USE_RTOOLS: true
+    R_QPDF: true
+
+  matrix:
+  - R_VERSION: stable
+  - R_VERSION: patched
+  - R_VERSION: oldrel
+    RTOOLS_VERSION: 33
+
 build_script:
   - travis-tool.sh install_deps
 
