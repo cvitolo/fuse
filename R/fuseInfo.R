@@ -25,107 +25,195 @@ fuseInfo <- function(mid) {
                          "qbrate_2b","sareamax","axv_bexp","loglamb",
                          "tishape","timedelay")
 
-  # (1) rainfall errors
+  # (1) rainfall errors ########################################################
   if(model$rferr == 11) parameters$rferr_add <- TRUE                # additive_e
   if(model$rferr == 12) parameters$rferr_mlt <- TRUE                # multiplc_e
 
-  # (2) upper-layer architecture
+  # (2) upper-layer architecture ###############################################
   # Common parameters:
-  parameters$maxwatr_1 <- TRUE # maximum total storage in layer1 (mm)
-  parameters$fracten   <- TRUE # frac total storage as tension storage (-)
+  parameters$maxwatr_1 <- TRUE            # maximum total storage in layer1 (mm)
+  parameters$fracten   <- TRUE       # frac total storage as tension storage (-)
   # even with a single state, tension and free storage should be defined!
+
   # Model-specific parameters:
-  # if(model$arch1 == 21) {}            # onestate_1, no other parameters needed
-  # if(model$arch1 == 22) {}            # tension1_1, no other parameters needed
+
+  # onestate_1, no other parameters needed
+  # if(model$arch1 == 21) {}
+
+  # tension1_1, no other parameters needed
+  # if(model$arch1 == 22) {}
+
+  # tension2_1 = tension storage sub-divided into recharge and excess
   if(model$arch1 == 23) {
-    # tension2_1 = tension storage sub-divided into recharge and excess
-    parameters$frchzne <- TRUE # PRMS: frac tension storage in recharge zone (-)
+
+    # PRMS: frac tension storage in recharge zone (-)
+    parameters$frchzne <- TRUE
+
   }
 
-  # (3) lower-layer architecture / baseflow
+  # (3) lower-layer architecture / baseflow ####################################
   # Common parameters:
-  parameters$maxwatr_2 <- TRUE # maximum total storage in layer2 (mm)
+  # maximum total storage in layer2 (mm)
+  parameters$maxwatr_2 <- TRUE
+  # The params below are always used to calculate qbsat,
+  # this also means that loglamb and tishape are always calculated!
+  # mean value of the log-transformed topographic index (m)
+  parameters$loglamb   <- TRUE
+  # shape parameter for the topo index Gamma distribution (-)
+  parameters$tishape   <- TRUE
+  # baseflow exponent (-)
+  parameters$qb_powr   <- TRUE
+
   # Model-specific parameters:
+
+  # fixedsiz_2
+  # power-law relation, no parameters needed for the topo index distribution
   if(model$arch2 == 31) {
-    # fixedsiz_2
-    # power-law relation, no parameters needed for the topo index distribution
-    parameters$baserte   <- TRUE  # baseflow rate (mm day-1)
-    parameters$qb_powr   <- TRUE  # baseflow exponent (-)
-  }
-  if(model$arch2 == 32) {
-    # tens2pll_2 = tension reservoir plus two parallel tanks
-    parameters$percfrac  <- TRUE  # fraction of percolation to tension storage (-)
-    parameters$fprimqb   <- TRUE  # SAC: fraction of baseflow in primary resvr (-)
-    parameters$qbrate_2a <- TRUE  # baseflow depletion rate for primary resvr (day-1)
-    parameters$qbrate_2b <- TRUE  # baseflow depletion rate for secondary resvr (day-1)
-  }
-  if(model$arch2 == 33) {
-    # unlimfrc_2 = baseflow resvr of unlimited size (0-huge), frac rate
-    parameters$qb_prms   <- TRUE  # baseflow depletion rate (day-1)
-  }
-  if(model$arch2 == 34) {
-    # unlimpow_2 = topmodel option, power-law transmissivity profile
-    parameters$baserte   <- TRUE  # baseflow rate (mm day-1)
-    parameters$loglamb   <- TRUE  # mean value of the log-transformed topographic index (m)
-    parameters$tishape   <- TRUE  # shape parameter for the topo index Gamma distribution (-)
-    parameters$qb_powr   <- TRUE  # baseflow exponent (-)
+
+    # baseflow rate (mm day-1)
+    parameters$baserte   <- TRUE
+
+    # baseflow exponent (-)
+    # parameters$qb_powr   <- TRUE
+
   }
 
-  # (4) surface runoff
+  # tens2pll_2 = tension reservoir plus two parallel tanks
+  if(model$arch2 == 32) {
+
+    # fraction of percolation to tension storage (-)
+    parameters$percfrac  <- TRUE
+
+    # SAC: fraction of baseflow in primary resvr (-)
+    parameters$fprimqb   <- TRUE
+
+    # baseflow depletion rate for primary resvr (day-1)
+    parameters$qbrate_2a <- TRUE
+
+    # baseflow depletion rate for secondary resvr (day-1)
+    parameters$qbrate_2b <- TRUE
+
+  }
+
+  # unlimfrc_2 = baseflow resvr of unlimited size (0-huge), frac rate
+  if(model$arch2 == 33) {
+
+    # baseflow depletion rate (day-1)
+    parameters$qb_prms   <- TRUE
+
+  }
+
+  # unlimpow_2 = topmodel option, power-law transmissivity profile
+  if(model$arch2 == 34) {
+
+    # baseflow rate (mm day-1)
+    parameters$baserte   <- TRUE
+
+    # mean value of the log-transformed topographic index (m)
+    # parameters$loglamb   <- TRUE
+
+    # shape parameter for the topo index Gamma distribution (-)
+    # parameters$tishape   <- TRUE
+
+    # baseflow exponent (-)
+    # parameters$qb_powr   <- TRUE
+
+  }
+
+  # (4) surface runoff #########################################################
   if(model$qsurf == 41) {
+
     # arno_x_vic = arno/xzang/vic parameterization (upper zone control)
     parameters$axv_bexp <- TRUE
-  }
-  if(model$qsurf == 42) {
-    # prms_varnt = prms variant (fraction of upper tension storage)
-    parameters$sareamax <- TRUE
-  }
-  if(model$qsurf == 43) {
-    # tmdl_param = topmodel parameterization
-    # need the topographic index if we don't have it for baseflow
-    if(model$arch2 == 32 || model$arch2 == 33 || model$arch2 == 31) {
-      parameters$loglamb   <- TRUE
-      parameters$tishape   <- TRUE
-    }
-    if(model$arch2 == 32 || model$arch2 == 33 || model$arch2 == 35) {
-      # need the topmodel power if we don't have it for baseflow
-      # baseflow exponent (-), used to modify the topographic
-      parameters$qb_powr   <- TRUE
-    }
+
   }
 
-  # (5) percolation
+  if(model$qsurf == 42) {
+
+    # prms_varnt = prms variant (fraction of upper tension storage)
+    parameters$sareamax <- TRUE
+
+  }
+
+  # if(model$qsurf == 43) {
+  #
+  #   # tmdl_param = topmodel parameterization
+  #   # need the topographic index if we don't have it for baseflow
+  #   # if(model$arch2 == 32 || model$arch2 == 33 || model$arch2 == 31) {
+  #   #   parameters$loglamb   <- TRUE
+  #   #   parameters$tishape   <- TRUE
+  #   #}
+  #
+  #   # if(model$arch2 == 32 || model$arch2 == 33 || model$arch2 == 35) {
+  #   #   # need the topmodel power if we don't have it for baseflow
+  #   #   # baseflow exponent (-), used to modify the topographic
+  #   #   parameters$qb_powr   <- TRUE
+  #   # }
+  #
+  # }
+
+  # (5) percolation ############################################################
+
   # perc_f2sat, perc_w2sat = standard equation k(theta)**c
   if(model$qperc == 51||model$qperc == 53) {
-    parameters$percrte   <- TRUE             # percolation rate (mm day-1)
-    parameters$percexp   <- TRUE             # percolation exponent (-)
+
+    # percolation rate (mm day-1)
+    parameters$percrte   <- TRUE
+
+    # percolation exponent (-)
+    parameters$percexp   <- TRUE
+
   }
 
   # perc_lower = perc defined by moisture content in lower layer (sac)
   if(model$qperc == 52) {
-    parameters$sacpmlt   <- TRUE             # multiplier in the SAC model for dry lower layer (-)
-    parameters$sacpexp   <- TRUE             # exponent in the SAC model for dry lower layer (-)
+
+    # multiplier in the SAC model for dry lower layer (-)
+    parameters$sacpmlt   <- TRUE
+
+    # exponent in the SAC model for dry lower layer (-)
+    parameters$sacpexp   <- TRUE
   }
 
-  # (6) evaporation
-  # if(model$esoil == 62) {}              # sequential, no additional parameters
+  # (6) evaporation ############################################################
+
+  # sequential, no additional parameters
+  # if(model$esoil == 62) {}
+
+  # rootweight
   if(model$esoil == 61) {
-    # rootweight
-    parameters$rtfrac1 <- TRUE   # fraction of roots in the upper layer (-)
+
+    # fraction of roots in the upper layer (-)
+    parameters$rtfrac1 <- TRUE
+
   }
 
-  # (7) interflow
-  # if(model$qintf == 71) {}              # intflwnone, no additional parameters
+  # (7) interflow ##############################################################
+
+  # intflwnone, no additional parameters
+  # if(model$qintf == 71) {}
+
+  # intflwsome
   if(model$qintf == 72) {
-    parameters$iflwrte <- TRUE   # interflow rate (mm day-1)
+
+    # interflow rate (mm day-1)
+    parameters$iflwrte <- TRUE
+
   }
 
-  # (8) routing
-  # if(model$q_tdh == 81) {}              # no_routing, no additional parameters
+  # (8) routing ################################################################
+
+  # no_routing, no additional parameters
+  # if(model$q_tdh == 81) {}
+
+  # routgamma
   if(model$q_tdh == 82) {
-    parameters$timedelay <- TRUE   # timedelay (days)
+
+    # timedelay (days)
+    parameters$timedelay <- TRUE
+
   }
 
-  return(cbind(model,parameters))
+  return(cbind(mid, model, parameters))
 
 }
