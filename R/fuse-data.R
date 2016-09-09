@@ -4,7 +4,7 @@
 #'
 #' @title FUSE model structures (numeric)
 #'
-#' @description This package contains the list of FUSE model structures implemented by Clark et al. (2011). This is available as numerical codes (\code{modlist}) or strings (\code{modliststring}). The variables are as follows:
+#' @description This object contains the list of FUSE model structures implemented by Clark et al. (2011). This is available as numerical codes (\code{modlist}) or strings (\code{modliststring}). The variables are as follows:
 #'
 #' \itemize{
 #'   \item mid = model id number

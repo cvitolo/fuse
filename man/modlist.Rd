@@ -6,7 +6,7 @@
 \title{FUSE model structures (numeric)}
 \format{A data frame with 1248 rows and 9 variables}
 \description{
-This package contains the list of FUSE model structures implemented by Clark et al. (2011). This is available as numerical codes (\code{modlist}) or strings (\code{modliststring}). The variables are as follows:
+This object contains the list of FUSE model structures implemented by Clark et al. (2011). This is available as numerical codes (\code{modlist}) or strings (\code{modliststring}). The variables are as follows:
 
 \itemize{
   \item mid = model id number
