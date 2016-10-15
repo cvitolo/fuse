@@ -35,7 +35,7 @@ Implementation of the framework for hydrological modelling FUSE described in Cla
 The rdefra package depends on a number of CRAN packages. Check for missing dependencies and install them:
 
 ```{r, eval=FALSE}
-packs <- c("dplyr", "zoo", "tgp", "stats", "BH", "Rcpp", "testthat", "devtools")
+packs <- c("DBI", "assertthat", "magrittr", "tibble", "maptree")
 new.packages <- packs[!(packs %in% installed.packages()[,"Package"])]
 if(length(new.packages)) install.packages(new.packages)
 ```
