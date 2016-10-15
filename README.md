@@ -33,7 +33,7 @@ and the package itself from Github with [devtools](https://github.com/hadley/dev
 devtools::install_github("cvitolo/fuse")
 ```
 
-Load the rdefra package:
+Load the package:
 
 ``` r
 library(fuse)
