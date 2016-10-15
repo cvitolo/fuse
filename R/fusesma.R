@@ -175,6 +175,20 @@ fusesma.sim <- function(DATA, mid, deltim,
     return(results)
 }
 
+#' Function to define the parameter ranges for FUSE Soil Moisture Accounting module
+#'
+#' @description Parameter ranges for FUSE Soil Moisture Accounting module, as suggested in Clark et al. (2011).
+#'
+#' @return The function returns the list of parameter ranges for the FUSE Soil Moisture Accounting model.
+#'
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' fusesma.ranges()
+#' }
+#'
+
 fusesma.ranges <- function() {
     list("rferr_add" = 0,                         # additive rainfall error (mm)
          "rferr_mlt" = 1,                    # multiplicative rainfall error (-)

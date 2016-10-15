@@ -21,10 +21,10 @@ Implementation of the framework for hydrological modelling FUSE described in Cla
 Installation
 ------------
 
-If you have already installed [R](https://cran.r-project.org/) (and [Rtools](https://cran.r-project.org/bin/windows/Rtools/) for Windows users), you can install the dependecies from CRAN:
+If you have already installed [R](https://cran.r-project.org/) (and [Rtools](https://cran.r-project.org/bin/windows/Rtools/) for Windows users), you can install the dependencies for the examples below from CRAN:
 
 ``` r
-install.packages(c("DBI", "assertthat", "magrittr", "tibble", "maptree"))
+install.packages(c("DBI", "assertthat", "magrittr", "tibble", "maptree", "tgp", "zoo", "qualV"))
 ```
 
 and the package itself from Github with [devtools](https://github.com/hadley/devtools):
@@ -61,7 +61,7 @@ Sample parameter set using Latin Hypercube method
 
 ``` r
 numberOfRuns <- 100
-parameters <- lhs( numberOfRuns, as.matrix(DefaultRanges) )
+parameters <- tgp::lhs( numberOfRuns, as.matrix(DefaultRanges) )
 parameters <- data.frame(parameters)
 names(parameters) <- row.names(DefaultRanges)
 ```
@@ -98,7 +98,7 @@ plot(DATA$Q,type="l",xlab="",ylab="Streamflow [mm/day]")
 allQ <- data.frame(matrix(NA,ncol=numberOfRuns,nrow=dim(DATA)[1]))
 for (i in 1:numberOfRuns){
   allQ[,i] <- fuse(DATA, myMID, myDELTIM, parameters[i,])
-  lines(zoo(allQ[,i],order.by=index(DATA)),col="gray",lwd=0.1)
+  lines(zoo::zoo(allQ[,i],order.by=zoo::index(DATA)),col="gray",lwd=0.1)
 }
 lines(DATA$Q,col="black")
 ```
@@ -114,7 +114,6 @@ mids <- c(60, 230, 342, 426)
 Run a multi-model calibration using the Nash-Sutcliffe efficiency as objective function
 
 ``` r
-library(qualV)
 indices <- rep(NA,4*numberOfRuns)
 discharges <- matrix(NA,ncol=4*numberOfRuns,nrow=dim(DATA)[1])
 kCounter <- 0
@@ -130,7 +129,7 @@ for (m in 1:4){
     
     Qrout <- fuse(DATA, myMID, myDELTIM, parameters[pid,])
  
-    indices[kCounter] <- EF(DATA$Q,Qrout)  
+    indices[kCounter] <- qualV::EF(DATA$Q,Qrout)  
     discharges[,kCounter] <- Qrout
     
     }
@@ -151,13 +150,13 @@ bestModel <- function(runNumber){
 }
 bestModel(bestRun)
  
-plot(coredata(DATA$Q),type="l",xlab="",ylab="Streamflow [mm/day]", lwd=0.5)
+plot(zoo::coredata(DATA$Q),type="l",xlab="",ylab="Streamflow [mm/day]", lwd=0.5)
  
 for(pid in 1:(4*numberOfRuns)){
  lines(discharges[,pid], col="gray", lwd=3)
 }
  
-lines(coredata(DATA$Q),col="black", lwd=1)
+lines(zoo::coredata(DATA$Q),col="black", lwd=1)
 lines(discharges[,bestRun],col="red", lwd=1)
 ```
 
@@ -169,7 +168,7 @@ bestRun0230 <- numberOfRuns + which(indices[(numberOfRuns+1):(2*numberOfRuns)] =
 bestRun0342 <- 2*numberOfRuns + which(indices[(2*numberOfRuns+1):(3*numberOfRuns)] == max(indices[(2*numberOfRuns+1):(3*numberOfRuns)]))
 bestRun0426 <- 3*numberOfRuns + which(indices[(3*numberOfRuns+1):(4*numberOfRuns)] == max(indices[(3*numberOfRuns+1):(4*numberOfRuns)]))
  
-plot(coredata(DATA$Q),type="l",xlab="",ylab="Streamflow [mm/day]", lwd=1)
+plot(zoo::coredata(DATA$Q),type="l",xlab="",ylab="Streamflow [mm/day]", lwd=1)
 lines(discharges[,bestRun0060], col="green", lwd=1)
 lines(discharges[,bestRun0230], col="blue", lwd=1)
 lines(discharges[,bestRun0342], col="pink", lwd=1)
@@ -188,21 +187,17 @@ Use fuse with hydromad
 
 ``` r
 # Install and load hydromad
-install.packages(c("zoo", "latticeExtra", "polynom", "car", 
+install.packages(c("latticeExtra", "polynom", "car", 
                    "Hmisc", "reshape", "DEoptim", "coda"))
 install.packages("dream", repos="http://hydromad.catchment.org")
 install.packages("hydromad", repos="http://hydromad.catchment.org")
 library(hydromad) 
 
-# Load fuse and an example dataset
-library(fuse)
-data(DATA)
-
 # Set the parameter ranges using hydromad.options
 hydromad.options(fusesma = fusesma.ranges(),
                  fuserouting = fuserouting.ranges())
 
-# Set up the model
+# Set up the model using the example dataset (DATA) loaded in the previous examples
 modspec <- hydromad(DATA,
                     sma = "fusesma", 
                     routing = "fuserouting", 

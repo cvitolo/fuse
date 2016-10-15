@@ -76,6 +76,21 @@ fuserouting.sim <- function(U, mid, deltim, timedelay) {
    return(X)
 }
 
+
+#' Function to define the parameter ranges for GAMMA routing module
+#'
+#' @description Parameter ranges for GAMMA routing module, as suggested in Clark et al. (2011).
+#'
+#' @return The function returns the list of parameter ranges for the Routing model.
+#'
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' fuserouting.ranges()
+#' }
+#'
+
 fuserouting.ranges <- function() {
    list("timedelay" = c(0.01, 5))        # time delay in runoff (days)
 }

@@ -2,7 +2,9 @@
 
 export(fuse)
 export(fuseInfo)
+export(fuserouting.ranges)
 export(fuserouting.sim)
+export(fusesma.ranges)
 export(fusesma.sim)
 export(generateParameters)
 export(model_param_table)
