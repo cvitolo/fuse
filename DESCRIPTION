@@ -16,7 +16,7 @@ Description: Implementation of the framework for hydrological modelling FUSE,
     ranges (see \code{fuse.ranges} and \code{routgamma.ranges}) and three data
     objects: DATA, parameters and modlist.
 Depends: R (>= 3.1.0)
-Imports: zoo, tgp, stats
+Imports: dplyr, zoo, tgp, stats
 LinkingTo: BH, Rcpp
 Suggests: testthat
 LazyData: true

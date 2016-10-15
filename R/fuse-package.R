@@ -5,6 +5,7 @@
 #' @name fuse
 #' @docType package
 #'
+#' @importFrom dplyr bind_rows
 #' @importFrom zoo coredata
 #' @importFrom tgp lhs
 #' @importFrom stats runif
