@@ -36,6 +36,11 @@ vignettes/*.pdf
 # Old and obsolete test files
 /old/
 
+# Shared libraries
+src/fuse.o
+src/fuse.so
+src/modelStructure.o
+
 # Others
 fuse.Rproj
 README.html

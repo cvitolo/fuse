@@ -1,8 +1,6 @@
 
 -   [fuse: Framework for Understanding Structural Errors (Hydrological Modelling)](#fuse-framework-for-understanding-structural-errors-hydrological-modelling)
--   [Dependencies & installation instructions](#dependencies-installation-instructions)
-    -   [Dependencies](#dependencies)
-    -   [Installation](#installation)
+-   [Installation](#installation)
 -   [Sample data and parameters](#sample-data-and-parameters)
 -   [Applications](#applications)
     -   [Example usage with 1 model structure](#example-usage-with-1-model-structure)
@@ -20,22 +18,16 @@ fuse: Framework for Understanding Structural Errors (Hydrological Modelling)
 
 Implementation of the framework for hydrological modelling FUSE described in Clark et al. (2008) and based on the Fortran code provided by M. Clark in 2011. The package consists of two modules: Soil Moisture Accounting module (fusesma.sim) and Gamma routing module (fuserouting.sim). It also contains default parameter ranges (fusesma.ranges and fuserouting.ranges) and three data objects: DATA (sample input dataset), parameters (sample parameters) and modlist (list of FUSE model structures).
 
-Dependencies & installation instructions
-----------------------------------------
+Installation
+------------
 
-### Dependencies
-
-The rdefra package depends on a number of CRAN packages. Check for missing dependencies and install them:
+If you have already installed [R](https://cran.r-project.org/) (and [Rtools](https://cran.r-project.org/bin/windows/Rtools/) for Windows users), you can install this package's dependecies from CRAN:
 
 ``` r
-packs <- c('zoo', 'tgp', 'devtools')
-new.packages <- packs[!(packs %in% installed.packages()[,"Package"])]
-if(length(new.packages)) install.packages(new.packages)
+install.packages(c("DBI", "assertthat", "magrittr", "tibble", "maptree"))
 ```
 
-### Installation
-
-You can install this package from Github with [devtools](https://github.com/hadley/devtools):
+and the package itself from Github with [devtools](https://github.com/hadley/devtools):
 
 ``` r
 devtools::install_github("cvitolo/fuse")
