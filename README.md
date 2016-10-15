@@ -21,7 +21,7 @@ Implementation of the framework for hydrological modelling FUSE described in Cla
 Installation
 ------------
 
-If you have already installed [R](https://cran.r-project.org/) (and [Rtools](https://cran.r-project.org/bin/windows/Rtools/) for Windows users), you can install this package's dependecies from CRAN:
+If you have already installed [R](https://cran.r-project.org/) (and [Rtools](https://cran.r-project.org/bin/windows/Rtools/) for Windows users), you can install the dependecies from CRAN:
 
 ``` r
 install.packages(c("DBI", "assertthat", "magrittr", "tibble", "maptree"))
