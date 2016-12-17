@@ -56,9 +56,11 @@ streamflow <- fuse(DATA = DATA,
 plot(streamflow, xlab = "", ylab = "Streamflow [mm/day]")
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-5-1.png)
+![](README_files/figure-markdown_github/example-1.png)
 
 For details and more complex examples (e.g. multi-model ensemble), please refer to the [vignette](vignettes/fuse_vignette.Rmd).
+
+Fortran users are advised to refer to the latest version of fuse available [here](https://github.com/naddor/fuse).
 
 Meta
 ----
