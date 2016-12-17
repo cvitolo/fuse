@@ -12,7 +12,8 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   warning = FALSE,
   message = FALSE,
-  cache = FALSE
+  cache = FALSE,
+  eval = TRUE
 )
 ```
 
@@ -20,28 +21,24 @@ knitr::opts_chunk$set(
 Implementation of the framework for hydrological modelling FUSE described in Clark et al. (2008) and based on the Fortran code provided by M. Clark in 2011. The package consists of two modules: Soil Moisture Accounting module (fusesma.sim) and Gamma routing module (fuserouting.sim). It also contains default parameter ranges (fusesma.ranges and fuserouting.ranges) and three data objects: DATA (sample input dataset), parameters (sample parameters) and modlist (list of FUSE model structures).
 
 ### Dependencies
-The rdefra package depends on a number of CRAN packages. Check for missing dependencies and install them:
+The fuse package, as well as the examples in this vignette, depend on a number of CRAN packages. Check for missing dependencies and install them:
 
-```{r, eval=FALSE}
+```{r, eval = FALSE}
 packs <- c("dplyr", "zoo", "tgp", "stats", "utils", "BH", "Rcpp", "testthat",
-           "devtools")
-new.packages <- packs[!(packs %in% installed.packages()[,"Package"])]
+           "qualV", "devtools")
+new.packages <- packs[!(packs %in% installed.packages()[, "Package"])]
 if(length(new.packages)) install.packages(new.packages)
 ```
 
 ### Installation
-
 You can install this package from Github with [devtools](https://github.com/hadley/devtools):
-
-```{r, eval=FALSE}
-library(devtools)
-install_github("cvitolo/r_fuse", subdir = "fuse")
+```{r, eval = FALSE}
+devtools::install_github("cvitolo/fuse")
 ```
 
-Load the rdefra package:
-
+Load the fuse package:
 ```{r}
-library(fuse)
+library("fuse")
 ```
 
 ### Data and parameters
@@ -52,14 +49,14 @@ myDELTIM <- 1
 ```
 
 Define parameter ranges
-```{r}
+```{r, eval = FALSE}
 DefaultRanges <- data.frame(t(data.frame(c(fusesma.ranges(),
                                            fuserouting.ranges()))))
-names(DefaultRanges) <- c("Min","Max")
+names(DefaultRanges) <- c("Min", "Max")
 ```
 
 Sample parameter set using Latin Hypercube method
-```{r}
+```{r, eval = FALSE}
 numberOfRuns <- 100
 parameters <- lhs( numberOfRuns, as.matrix(DefaultRanges) )
 parameters <- data.frame(parameters)
@@ -68,6 +65,7 @@ names(parameters) <- row.names(DefaultRanges)
 
 Alternatively, sample parameter set using built-in function
 ```{r}
+set.seed(1)
 parameters <- generateParameters(100)
 ```
 
@@ -79,23 +77,29 @@ myMID <- 60
 
 Use the built-in function to run FUSE for the 1st sampled parameter set
 ```{r}
-x <- fuse(DATA, myMID, myDELTIM, parameters[1,])
+streamflow <- fuse(DATA, myMID, myDELTIM, parameters[1,])
 
-plot(x,xlab="",ylab="Streamflow [mm/day]")
+plot(streamflow, xlab = "", ylab = "Streamflow [mm/day]")
 ```
 
 Run FUSE for all the sampled parameter sets 
 ```{r}
-plot(DATA$Q,type="l",xlab="",ylab="Streamflow [mm/day]")
-allQ <- data.frame(matrix(NA,ncol=numberOfRuns,nrow=dim(DATA)[1]))
-for (i in 1:numberOfRuns){
-  allQ[,i] <- fuse(DATA, myMID, myDELTIM, parameters[i,])
-  lines(zoo(allQ[,i],order.by=index(DATA)),col="gray",lwd=0.1)
+plot(DATA$Q, type = "l", xlab = "", ylab = "Streamflow [mm/day]")
+
+for (i in 1:dim(parameters)[1]){
+  
+  lines(zoo::zoo(fuse(DATA = DATA, 
+                      mid = myMID, 
+                      deltim = myDELTIM, 
+                      ParameterSet = parameters[i,]), 
+                 order.by = zoo::index(DATA)),
+        col = "gray", lwd = 0.1)
+  
 }
-lines(DATA$Q,col="black")
+lines(DATA$Q, col = "black")
 ```
 
-### Ensemble example usage
+### Ensemble modelling
 Define a group of model structures to use
 ```{r}
 mids <- c(60, 230, 342, 426)
@@ -103,24 +107,25 @@ mids <- c(60, 230, 342, 426)
  
 Run a multi-model calibration using the Nash-Sutcliffe efficiency as objective function
 ```{r}
-library(qualV)
-indices <- rep(NA,4*numberOfRuns)
-discharges <- matrix(NA,ncol=4*numberOfRuns,nrow=dim(DATA)[1])
+indices <- rep(NA, 4*dim(parameters)[1])
+discharges <- matrix(NA, ncol = 4*dim(parameters)[1], nrow = dim(DATA)[1])
 kCounter <- 0
 
 for (m in 1:4){
 
   myMID <- mids[m]
 
-  for (pid in 1:numberOfRuns){
+  for (pid in 1:dim(parameters)[1]){
 
     kCounter <- kCounter + 1
-    ParameterSet <- as.list(parameters[pid,])
     
-    Qrout <- fuse(DATA, myMID, myDELTIM, parameters[pid,])
+    Qrout <- fuse(DATA = DATA, 
+                  mid = myMID, 
+                  deltim = myDELTIM, 
+                  ParameterSet = parameters[pid, ])
  
-    indices[kCounter] <- EF(DATA$Q,Qrout)  
-    discharges[,kCounter] <- Qrout
+    indices[kCounter] <- qualV::EF(DATA$Q, Qrout)  
+    discharges[, kCounter] <- Qrout
     
     }
 }
@@ -129,38 +134,62 @@ for (m in 1:4){
 Compare results
 ```{r}
 bestRun <- which(indices == max(indices))
- 
+numberOfRuns <- dim(parameters)[1]
+
 bestModel <- function(runNumber){
- if (runNumber<(numberOfRuns+1)) myBestModel <- "TOPMODEL"
- if (runNumber>(numberOfRuns+1) & runNumber<(2*numberOfRuns+1)) myBestModel <- "ARNOXVIC"
- if (runNumber>(2*numberOfRuns+1) & runNumber<(3*numberOfRuns+1)) myBestModel <- "PRMS"
- if (runNumber>(3*numberOfRuns+1) & runNumber<(4*numberOfRuns+1)) myBestModel <- "SACRAMENTO"
- return(myBestModel)
+  
+  if (runNumber < (numberOfRuns + 1)) myBestModel <- "TOPMODEL"
+  
+  if (runNumber > (numberOfRuns + 1) & 
+      runNumber < (2*numberOfRuns + 1)) myBestModel <- "ARNOXVIC"
+  
+  if (runNumber > (2*numberOfRuns + 1) &
+      runNumber < (3*numberOfRuns + 1)) myBestModel <- "PRMS"
+  
+  if (runNumber > (3*numberOfRuns + 1) & 
+      runNumber < (4*numberOfRuns + 1)) myBestModel <- "SACRAMENTO"
+  
+  return(myBestModel)
+  
 }
+
 bestModel(bestRun)
  
-plot(coredata(DATA$Q),type="l",xlab="",ylab="Streamflow [mm/day]", lwd=0.5)
+plot(zoo::coredata(DATA$Q), type = "l", lwd=0.5, 
+     xlab = "", ylab = "Streamflow [mm/day]")
  
 for(pid in 1:(4*numberOfRuns)){
- lines(discharges[,pid], col="gray", lwd=3)
+  
+ lines(discharges[, pid], col = "gray", lwd = 3)
+  
 }
  
-lines(coredata(DATA$Q),col="black", lwd=1)
-lines(discharges[,bestRun],col="red", lwd=1)
+lines(zoo::coredata(DATA$Q), col = "black", lwd = 1)
+lines(discharges[, bestRun], col = "red", lwd = 1)
 ```
 
 How the best simulation of each model structure compare to each other?
 ```{r} 
 bestRun0060 <- which(indices[1:numberOfRuns] == max(indices[1:numberOfRuns]))
-bestRun0230 <- numberOfRuns + which(indices[(numberOfRuns+1):(2*numberOfRuns)] == max(indices[(numberOfRuns+1):(2*numberOfRuns)]))
-bestRun0342 <- 2*numberOfRuns + which(indices[(2*numberOfRuns+1):(3*numberOfRuns)] == max(indices[(2*numberOfRuns+1):(3*numberOfRuns)]))
-bestRun0426 <- 3*numberOfRuns + which(indices[(3*numberOfRuns+1):(4*numberOfRuns)] == max(indices[(3*numberOfRuns+1):(4*numberOfRuns)]))
- 
-plot(coredata(DATA$Q),type="l",xlab="",ylab="Streamflow [mm/day]", lwd=1)
-lines(discharges[,bestRun0060], col="green", lwd=1)
-lines(discharges[,bestRun0230], col="blue", lwd=1)
-lines(discharges[,bestRun0342], col="pink", lwd=1)
-lines(discharges[,bestRun0426], col="orange", lwd=1)
+
+bestRun0230 <- numberOfRuns + 
+  which(indices[(numberOfRuns+1):(2*numberOfRuns)] ==
+          max(indices[(numberOfRuns+1):(2*numberOfRuns)]))
+
+bestRun0342 <- 2*numberOfRuns +
+  which(indices[(2*numberOfRuns+1):(3*numberOfRuns)] ==
+          max(indices[(2*numberOfRuns+1):(3*numberOfRuns)]))
+
+bestRun0426 <- 3*numberOfRuns +
+  which(indices[(3*numberOfRuns+1):(4*numberOfRuns)] ==
+          max(indices[(3*numberOfRuns+1):(4*numberOfRuns)]))
+
+plot(zoo::coredata(DATA$Q), type = "l", lwd=1,
+     xlab = "", ylab = "Streamflow [mm/day]")
+lines(discharges[, bestRun0060], col = "green", lwd = 1)
+lines(discharges[, bestRun0230], col = "blue", lwd = 1)
+lines(discharges[, bestRun0342], col = "pink", lwd = 1)
+lines(discharges[, bestRun0426], col = "orange", lwd = 1)
  
 legend("top", 
         c("TOPMODEL", "ARNOXVIC", "PRMS","SACRAMENTO"), 
