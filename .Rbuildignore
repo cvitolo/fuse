@@ -8,3 +8,6 @@ preparePackage.R
 .travis.yml
 paper
 ^CONDUCT\.md$
+README_files
+_config.yml
+docs

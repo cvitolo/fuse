@@ -14,7 +14,7 @@ Description: Implementation of the framework for hydrological modelling FUSE,
     consists of two modules: Soil Moisture Accounting module (\code{fuse.sim}) and
     Gamma routing module (\code{routgamma.sim}). It also contains default parameter
     ranges (see \code{fuse.ranges} and \code{routgamma.ranges}) and three data
-    objects: DATA, parameters and modlist.
+    objects: fuse_hydrological_timeseries, parameters and modlist.
 Depends: R (>= 3.0.0)
 Imports: dplyr, zoo, tgp, stats, utils
 LinkingTo: BH, Rcpp

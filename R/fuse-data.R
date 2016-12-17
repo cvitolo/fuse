@@ -1,11 +1,11 @@
+#' Data set: modlist
+#'
 #' @name modlist
-#'
 #' @docType data
-#'
 #' @title FUSE model structures (numeric)
+#' @format A data frame with 1248 rows and 9 variables
 #'
 #' @description This object contains the list of FUSE model structures implemented by Clark et al. (2011). This is available as numerical codes (\code{modlist}) or strings (\code{modliststring}). The variables are as follows:
-#'
 #' \itemize{
 #'   \item mid = model id number
 #'   \item rferr = type of rainfall error
@@ -17,7 +17,6 @@
 #'   \item qintf = interflow
 #'   \item q_tdh = routing
 #' }
-#'
 #' Each row identifies a model structure and each column identifies a different element of the model structure. For each element of the model structure, several model decisions can be made (see Clark et al. 2011 for details):
 #' \itemize{
 #'   \item Rainfall error (rferr) \itemize{
@@ -59,7 +58,6 @@
 #'        \item rout_gamma (routing allowed using Gamma distribution with shape parameter = 2.5) = \strong{82}
 #'        }
 #'  }
-#'
 #'  The function \code{readmd()} returns the model components corresponding to a given id. A similar function (\code{readmd2var()}) reads the components as either character or numeric vector.
 #'
 #' On Clark's model list, the parent models (Topmodel, VIC, PRMS and Sacramento) have id = 60, 230, 342 and 426 respectively.
@@ -68,18 +66,16 @@
 #' data(modlist)
 #' modlist[5,]
 #'
-#' @format A data frame with 1248 rows and 9 variables
-#'
 NULL
 
+#' Data set: modliststring
+#'
 #' @name modliststring
-#'
 #' @docType data
-#'
 #' @title FUSE model structures (string)
+#' @format A data frame with 1248 rows and 9 variables
 #'
 #' @description This package contains the list of FUSE model structures implemented by Clark et al. (2011). This is available as numerical codes (\code{modlist}) or strings (\code{modliststring}). The variables are as follows:
-#'
 #' \itemize{
 #'   \item mid = model id number
 #'   \item rferr = type of rainfall error
@@ -91,7 +87,6 @@ NULL
 #'   \item qintf = interflow
 #'   \item q_tdh = routing
 #' }
-#'
 #' Each row identifies a model structure and each column identifies a different element of the model structure. For each element of the model structure, several model decisions can be made (see Clark et al. 2011 for details):
 #' \itemize{
 #'   \item Rainfall error (rferr) \itemize{
@@ -133,15 +128,29 @@ NULL
 #'        \item \strong{rout_gamma} (routing allowed using Gamma distribution with shape parameter = 2.5) = 82
 #'        }
 #'  }
-#'
 #'  The function \code{readmd()} returns the model components corresponding to a given id. A similar function (\code{readmd2var()}) reads the components as either character or numeric vector.
-#'
 #' On Clark's model list, the parent models (Topmodel, VIC, PRMS and Sacramento) have id = 60, 230, 342 and 426 respectively.
-#'
 #' For example, model 5 is identified by the following strings:
 #' data(modliststring)
 #' modliststring[5,]
 #'
-#' @format A data frame with 1248 rows and 9 variables
+NULL
+
+#' Data set: fuse_hydrological_timeseries
+#'
+#' @name fuse_hydrological_timeseries
+#' @docType data
+#' @title FUSE dummy dataset
+#' @description This dataset consists of a data.frame with 3 columns: P (precipitation time series), E(potential evapo-transpiration time series), Q(discharge time series).
+#'
+#' @format The format is: 'zoo' series from 2000-01-01 to 2002-12-31
+#' The data consists of a numeric data.frame with 1096 rows and 3 columns named: "P", "E" and "Q". The temporal index consist of daily dates from "2000-01-01" to "2000-01-05".
+#'
+#' @examples
+#' data(fuse_hydrological_timeseries)
+#' str(fuse_hydrological_timeseries)
+#' plot(fuse_hydrological_timeseries)
+#'
+#' @keywords datasets
 #'
 NULL

@@ -47,10 +47,11 @@
 #'
 #' @examples
 #' \dontrun{
-#' data(DATA)
+#' data(fuse_hydrological_timeseries)
 #' set.seed(123)
 #' parameters <- generateParameters(1)
-#' U <- fusesma.sim(DATA, 60, 1, parameters$rferr_add, parameters$rferr_mlt,
+#' U <- fusesma.sim(fuse_hydrological_timeseries,
+#'                  60, 1, parameters$rferr_add, parameters$rferr_mlt,
 #'                  parameters$frchzne, parameters$fracten,
 #'                  parameters$maxwatr_1, parameters$percfrac,
 #'                  parameters$fprimqb, parameters$qbrate_2a,

@@ -7,7 +7,7 @@ fuse: an R package implementing the Framework for Understanding Structural Error
 
 [![Build Status](https://travis-ci.org/cvitolo/fuse.svg)](https://travis-ci.org/cvitolo/fuse.svg?branch=master) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/cvitolo/fuse?branch=master&svg=true)](https://ci.appveyor.com/project/cvitolo/fuse) [![codecov.io](https://codecov.io/github/cvitolo/fuse/coverage.svg?branch=master)](https://codecov.io/github/cvitolo/fuse?branch=master)
 
-Implementation of the framework for hydrological modelling FUSE described in Clark et al. (2008) and based on the Fortran code provided by M. Clark in 2011. The package consists of two modules: Soil Moisture Accounting module (fusesma.sim) and Gamma routing module (fuserouting.sim). It also contains default parameter ranges (fusesma.ranges and fuserouting.ranges) and three data objects: DATA (sample input dataset), parameters (sample parameters) and modlist (list of FUSE model structures).
+Implementation of the framework for hydrological modelling FUSE described in Clark et al. (2008) and based on the Fortran code provided by M. Clark in 2011. The package consists of two modules: Soil Moisture Accounting module (fusesma.sim) and Gamma routing module (fuserouting.sim). It also contains default parameter ranges (fusesma.ranges and fuserouting.ranges) and three data objects: fuse\_hydrological\_timeseries (sample input dataset), parameters (sample parameters) and modlist (list of FUSE model structures).
 
 ### Dependencies
 
@@ -40,13 +40,13 @@ The simplest way to test `fuse` is to use the dummy data provided with this pack
 
 ``` r
 # Load the dummy data
-data(DATA)
+data(fuse_hydrological_timeseries)
 
 # Sample the parameter range
 parameters <- generateParameters(1)
 
 # Run fuse 
-streamflow <- fuse(DATA = DATA, 
+streamflow <- fuse(DATA = fuse_hydrological_timeseries, 
                    mid = 60,       # Model structure = TOPMODEL
                    deltim = 1,     # Daily time step
                    ParameterSet = parameters)

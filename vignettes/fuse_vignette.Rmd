@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 ```
 
 # Introduction
-Implementation of the framework for hydrological modelling FUSE described in Clark et al. (2008) and based on the Fortran code provided by M. Clark in 2011. The package consists of two modules: Soil Moisture Accounting module (fusesma.sim) and Gamma routing module (fuserouting.sim). It also contains default parameter ranges (fusesma.ranges and fuserouting.ranges) and three data objects: DATA (sample input dataset), parameters (sample parameters) and modlist (list of FUSE model structures).
+Implementation of the framework for hydrological modelling FUSE described in Clark et al. (2008) and based on the Fortran code provided by M. Clark in 2011. The package consists of two modules: Soil Moisture Accounting module (fusesma.sim) and Gamma routing module (fuserouting.sim). It also contains default parameter ranges (fusesma.ranges and fuserouting.ranges) and three data objects: fuse_hydrological_timeseries (sample input dataset), parameters (sample parameters) and modlist (list of FUSE model structures).
 
 ### Dependencies
 The fuse package, as well as the examples in this vignette, depend on a number of CRAN packages. Check for missing dependencies and install them:
@@ -44,7 +44,7 @@ library("fuse")
 ### Data and parameters
 Load sample data (daily time step)
 ```{r}
-data(DATA)
+data(fuse_hydrological_timeseries)
 myDELTIM <- 1
 ```
 
@@ -77,26 +77,27 @@ myMID <- 60
 
 Use the built-in function to run FUSE for the 1st sampled parameter set
 ```{r}
-streamflow <- fuse(DATA, myMID, myDELTIM, parameters[1,])
+streamflow <- fuse(fuse_hydrological_timeseries, myMID, myDELTIM, parameters[1,])
 
 plot(streamflow, xlab = "", ylab = "Streamflow [mm/day]")
 ```
 
 Run FUSE for all the sampled parameter sets 
 ```{r}
-plot(DATA$Q, type = "l", xlab = "", ylab = "Streamflow [mm/day]")
+plot(fuse_hydrological_timeseries$Q, type = "l", 
+     xlab = "", ylab = "Streamflow [mm/day]")
 
 for (i in 1:dim(parameters)[1]){
   
-  lines(zoo::zoo(fuse(DATA = DATA, 
+  lines(zoo::zoo(fuse(DATA = fuse_hydrological_timeseries, 
                       mid = myMID, 
                       deltim = myDELTIM, 
                       ParameterSet = parameters[i,]), 
-                 order.by = zoo::index(DATA)),
+                 order.by = zoo::index(fuse_hydrological_timeseries)),
         col = "gray", lwd = 0.1)
   
 }
-lines(DATA$Q, col = "black")
+lines(fuse_hydrological_timeseries$Q, col = "black")
 ```
 
 ### Ensemble modelling
@@ -108,7 +109,7 @@ mids <- c(60, 230, 342, 426)
 Run a multi-model calibration using the Nash-Sutcliffe efficiency as objective function
 ```{r}
 indices <- rep(NA, 4*dim(parameters)[1])
-discharges <- matrix(NA, ncol = 4*dim(parameters)[1], nrow = dim(DATA)[1])
+discharges <- matrix(NA, ncol = 4*dim(parameters)[1], nrow = dim(fuse_hydrological_timeseries)[1])
 kCounter <- 0
 
 for (m in 1:4){
@@ -119,12 +120,12 @@ for (m in 1:4){
 
     kCounter <- kCounter + 1
     
-    Qrout <- fuse(DATA = DATA, 
+    Qrout <- fuse(DATA = fuse_hydrological_timeseries, 
                   mid = myMID, 
                   deltim = myDELTIM, 
                   ParameterSet = parameters[pid, ])
  
-    indices[kCounter] <- qualV::EF(DATA$Q, Qrout)  
+    indices[kCounter] <- qualV::EF(fuse_hydrological_timeseries$Q, Qrout)  
     discharges[, kCounter] <- Qrout
     
     }
@@ -155,7 +156,7 @@ bestModel <- function(runNumber){
 
 bestModel(bestRun)
  
-plot(zoo::coredata(DATA$Q), type = "l", lwd=0.5, 
+plot(zoo::coredata(fuse_hydrological_timeseries$Q), type = "l", lwd=0.5, 
      xlab = "", ylab = "Streamflow [mm/day]")
  
 for(pid in 1:(4*numberOfRuns)){
@@ -164,7 +165,7 @@ for(pid in 1:(4*numberOfRuns)){
   
 }
  
-lines(zoo::coredata(DATA$Q), col = "black", lwd = 1)
+lines(zoo::coredata(fuse_hydrological_timeseries$Q), col = "black", lwd = 1)
 lines(discharges[, bestRun], col = "red", lwd = 1)
 ```
 
@@ -184,7 +185,7 @@ bestRun0426 <- 3*numberOfRuns +
   which(indices[(3*numberOfRuns+1):(4*numberOfRuns)] ==
           max(indices[(3*numberOfRuns+1):(4*numberOfRuns)]))
 
-plot(zoo::coredata(DATA$Q), type = "l", lwd=1,
+plot(zoo::coredata(fuse_hydrological_timeseries$Q), type = "l", lwd=1,
      xlab = "", ylab = "Streamflow [mm/day]")
 lines(discharges[, bestRun0060], col = "green", lwd = 1)
 lines(discharges[, bestRun0230], col = "blue", lwd = 1)
@@ -211,14 +212,14 @@ library(hydromad)
 
 # Load fuse and an example dataset
 library(fuse)
-data(DATA)
+data(fuse_hydrological_timeseries)
 
 # Set the parameter ranges using hydromad.options
 hydromad.options(fusesma = fusesma.ranges(),
                  fuserouting = fuserouting.ranges())
 
 # Set up the model
-modspec <- hydromad(DATA,
+modspec <- hydromad(fuse_hydrological_timeseries,
                     sma = "fusesma", 
                     routing = "fuserouting", 
                     mid = 1:1248, 

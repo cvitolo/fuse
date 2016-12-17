@@ -22,7 +22,7 @@ Rainfall (P), Potential Evapo-Transpiration (E) and Streamflow (Q)}
 Simulated streamflow discharge
 }
 \description{
-Implementation of the framework for hydrological modelling FUSE, based on the Fortran version described in Clark et al. (2008). The package consists of two modules: Soil Moisture Accounting module (\code{fuse.sim}) and Gamma routing module (\code{routgamma.sim}). It also contains default parameter ranges (see \code{fuse.ranges} and \code{routgamma.ranges}) and three data objects: DATA, parameters and modlist.
+Implementation of the framework for hydrological modelling FUSE, based on the Fortran version described in Clark et al. (2008). The package consists of two modules: Soil Moisture Accounting module (\code{fuse.sim}) and Gamma routing module (\code{routgamma.sim}). It also contains default parameter ranges (see \code{fuse.ranges} and \code{routgamma.ranges}) and three data objects: fuse_hydrological_timeseries, parameters and modlist.
 
 Combine FUSE soil moisture accounting module and routing module in one function
 }
@@ -31,10 +31,10 @@ The list of parameters can be generated as follows: ParameterSet <- GeneratePset
 }
 \examples{
 \dontrun{
-data(DATA)
+data(fuse_hydrological_timeseries)
 set.seed(123)
 parameters <- generateParameters(1)
-Q <- fuse(DATA, 60, 1, parameters)
+Q <- fuse(fuse_hydrological_timeseries, 60, 1, parameters)
 }
 
 }

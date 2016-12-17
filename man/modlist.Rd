@@ -7,7 +7,6 @@
 \format{A data frame with 1248 rows and 9 variables}
 \description{
 This object contains the list of FUSE model structures implemented by Clark et al. (2011). This is available as numerical codes (\code{modlist}) or strings (\code{modliststring}). The variables are as follows:
-
 \itemize{
   \item mid = model id number
   \item rferr = type of rainfall error
@@ -19,7 +18,6 @@ This object contains the list of FUSE model structures implemented by Clark et a
   \item qintf = interflow
   \item q_tdh = routing
 }
-
 Each row identifies a model structure and each column identifies a different element of the model structure. For each element of the model structure, several model decisions can be made (see Clark et al. 2011 for details):
 \itemize{
   \item Rainfall error (rferr) \itemize{
@@ -61,7 +59,6 @@ Each row identifies a model structure and each column identifies a different ele
        \item rout_gamma (routing allowed using Gamma distribution with shape parameter = 2.5) = \strong{82}
        }
  }
-
  The function \code{readmd()} returns the model components corresponding to a given id. A similar function (\code{readmd2var()}) reads the components as either character or numeric vector.
 
 On Clark's model list, the parent models (Topmodel, VIC, PRMS and Sacramento) have id = 60, 230, 342 and 426 respectively.
@@ -69,5 +66,8 @@ On Clark's model list, the parent models (Topmodel, VIC, PRMS and Sacramento) ha
 For example, model 5 is identified by the following numeric codes:
 data(modlist)
 modlist[5,]
+}
+\details{
+Data set: modlist
 }
 

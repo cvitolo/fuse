@@ -2,14 +2,14 @@ context("Data")
 
 test_that("Single run", {
 
-  data(DATA)
+  data(fuse_hydrological_timeseries)
   myDELTIM <- 1
   myMID <- 60
 
   set.seed(1)
   parameters <- generateParameters(1)
 
-  x <- round(coredata(fuse(DATA = DATA, mid = myMID, deltim = myDELTIM,
+  x <- round(coredata(fuse(DATA = fuse_hydrological_timeseries, mid = myMID, deltim = myDELTIM,
             ParameterSet = parameters)), 3)
 
   # dput(x, 'fuse/inst/tests/testthat/example01')
@@ -21,7 +21,7 @@ test_that("Single run", {
 
 test_that("Ensemble run", {
 
-  data(DATA)
+  data(fuse_hydrological_timeseries)
   myDELTIM <- 1
   mids <- c(60, 230, 342, 426)
 
@@ -29,7 +29,7 @@ test_that("Ensemble run", {
   parameters <- generateParameters(10)
   numberOfRuns <- 10
 
-  discharges <- matrix(NA,ncol=4*numberOfRuns,nrow=dim(DATA)[1])
+  discharges <- matrix(NA,ncol=4*numberOfRuns,nrow=dim(fuse_hydrological_timeseries)[1])
   kCounter <- 0
 
   for (m in 1:4){
@@ -41,7 +41,7 @@ test_that("Ensemble run", {
       kCounter <- kCounter + 1
       ParameterSet <- as.list(parameters[pid,])
 
-      discharges[,kCounter] <- round(coredata(fuse(DATA, myMID, myDELTIM, parameters[pid,])), 3)
+      discharges[,kCounter] <- round(coredata(fuse(fuse_hydrological_timeseries, myMID, myDELTIM, parameters[pid,])), 3)
 
     }
   }

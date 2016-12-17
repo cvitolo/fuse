@@ -14,10 +14,10 @@
 #'
 #' @examples
 #' \dontrun{
-#' data(DATA)
+#' data(fuse_hydrological_timeseries)
 #' set.seed(123)
 #' parameters <- generateParameters(1)
-#' Q <- fuse(DATA, 60, 1, parameters)
+#' Q <- fuse(fuse_hydrological_timeseries, 60, 1, parameters)
 #' }
 #'
 
