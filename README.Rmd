@@ -12,8 +12,6 @@ knitr::opts_chunk$set(
   eval = TRUE
 )
 ```
-Framework for Understanding Structural Errors
-======
 
 <!-- Edit the README.Rmd only!!! The README.md is generated automatically from README.Rmd. -->
 
