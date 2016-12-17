@@ -1,5 +1,8 @@
 
 <!-- Edit the README.Rmd only!!! The README.md is generated automatically from README.Rmd. -->
+fuse: an R package implementing the Framework for Understanding Structural Errors
+---------------------------------------------------------------------------------
+
 [![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.14005.svg)](http://dx.doi.org/10.5281/zenodo.14005) [![status](http://joss.theoj.org/papers/392a55daada04a86f95eaa8da134a28d/status.svg)](http://joss.theoj.org/papers/392a55daada04a86f95eaa8da134a28d)
 
 [![Build Status](https://travis-ci.org/cvitolo/fuse.svg)](https://travis-ci.org/cvitolo/fuse.svg?branch=master) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/cvitolo/fuse?branch=master&svg=true)](https://ci.appveyor.com/project/cvitolo/fuse) [![codecov.io](https://codecov.io/github/cvitolo/fuse/coverage.svg?branch=master)](https://codecov.io/github/cvitolo/fuse?branch=master)
@@ -17,8 +20,7 @@ new.packages <- packs[!(packs %in% installed.packages()[, "Package"])]
 if(length(new.packages)) install.packages(new.packages)
 ```
 
-Installation
-------------
+### Installation
 
 You can install this package from Github with [devtools](https://github.com/hadley/devtools):
 
@@ -32,8 +34,7 @@ Load the package:
 library("fuse")
 ```
 
-Usage
------
+### Usage
 
 The simplest way to test `fuse` is to use the dummy data provided with this package, sample the parameter range using the built-in function `generateParameters()` and run the model with 1 model structure (e.g. TOPMODEL):
 
@@ -59,8 +60,7 @@ For details and more complex examples (e.g. multi-model ensemble), please refer 
 
 Fortran users are advised to refer to the latest version of fuse available [here](https://github.com/naddor/fuse).
 
-Meta
-----
+### Meta
 
 -   Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
 -   Please [report any issues or bugs](https://github.com/cvitolo/fuse/issues).
