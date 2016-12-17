@@ -1,6 +1,6 @@
 
-fuse: Framework for Understanding Structural Errors ([HTML website](https://cvitolo.github.io/fuse/))
-=====================================================================================================
+Framework for Understanding Structural Errors
+=============================================
 
 <!-- Edit the README.Rmd only!!! The README.md is generated automatically from README.Rmd. -->
 [![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.14005.svg)](http://dx.doi.org/10.5281/zenodo.14005) [![status](http://joss.theoj.org/papers/392a55daada04a86f95eaa8da134a28d/status.svg)](http://joss.theoj.org/papers/392a55daada04a86f95eaa8da134a28d)
