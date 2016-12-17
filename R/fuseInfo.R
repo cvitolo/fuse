@@ -1,4 +1,6 @@
-#' This function returns information on model structure components and parameters used, given FUSE model.
+#' Generate information on model structure components and parameter values
+#'
+#' @description fuseInfo is used to generate tables to summarise which model component and parameters are used given the model id. This is important for calculating the posterior distribution of parameter values and model structures.
 #'
 #' @param mid FUSE model structure ID number (integer from 1 to 1248).
 #'

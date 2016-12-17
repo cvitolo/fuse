@@ -15,7 +15,7 @@ readmd2var(mid, number = FALSE)
 prints on the screen a desciption of the selected model
 }
 \description{
-Read Model Decisions
+readmd2var is used by the model itself to generate the model structure from the id number (mid).
 }
 \examples{
 \dontrun{

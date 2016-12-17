@@ -13,7 +13,7 @@ readmd(mid)
 prints on the screen a description of the selected model
 }
 \description{
-Read Model Decisions
+readmd is used for reporting, to generate tables (usually via xtable) to list model structures and describe each component.
 }
 \examples{
 \dontrun{

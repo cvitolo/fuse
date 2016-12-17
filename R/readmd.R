@@ -1,5 +1,7 @@
 #' Read Model Decisions
 #'
+#' @description readmd is used for reporting, to generate tables (usually via xtable) to list model structures and describe each component.
+#'
 #' @param mid model id number in Model List 2011(see below for details)
 #'
 #' @return prints on the screen a description of the selected model
@@ -72,6 +74,8 @@ readmd <- function(mid) {
 }
 
 #' Read Model Decisions
+#'
+#' @description readmd2var is used by the model itself to generate the model structure from the id number (mid).
 #'
 #' @param mid model id number in Model List 2011(see below for details)
 #' @param number boolean value. If set to TRUE, the output is in num format.

@@ -2,7 +2,7 @@
 % Please edit documentation in R/fuseInfo.R
 \name{fuseInfo}
 \alias{fuseInfo}
-\title{This function returns information on model structure components and parameters used, given FUSE model.}
+\title{Generate information on model structure components and parameter values}
 \usage{
 fuseInfo(mid)
 }
@@ -10,7 +10,7 @@ fuseInfo(mid)
 \item{mid}{FUSE model structure ID number (integer from 1 to 1248).}
 }
 \description{
-This function returns information on model structure components and parameters used, given FUSE model.
+fuseInfo is used to generate tables to summarise which model component and parameters are used given the model id. This is important for calculating the posterior distribution of parameter values and model structures.
 }
 \examples{
 \dontrun{
