@@ -24,7 +24,10 @@ Installation
 If you have already installed [R](https://cran.r-project.org/) (and [Rtools](https://cran.r-project.org/bin/windows/Rtools/) for Windows users), you can install the dependencies for the examples below from CRAN:
 
 ``` r
-install.packages(c("DBI", "assertthat", "magrittr", "tibble", "maptree", "tgp", "zoo", "qualV"))
+packs <- c("dplyr", "zoo", "tgp", "stats", "utils", "BH", "Rcpp", "testthat",
+           "devtools")
+new.packages <- packs[!(packs %in% installed.packages()[,"Package"])]
+if(length(new.packages)) install.packages(new.packages)
 ```
 
 and the package itself from Github with [devtools](https://github.com/hadley/devtools):
