@@ -18,7 +18,9 @@ knitr::opts_chunk$set(
 ```
 
 # Introduction
-Implementation of the framework for hydrological modelling FUSE described in Clark et al. (2008) and based on the Fortran code provided by M. Clark in 2011. The package consists of two modules: Soil Moisture Accounting module (fusesma.sim) and Gamma routing module (fuserouting.sim). It also contains default parameter ranges (fusesma.ranges and fuserouting.ranges) and three data objects: fuse_hydrological_timeseries (sample input dataset), parameters (sample parameters) and modlist (list of FUSE model structures).
+The fuse modelling framework takes as input rainfall and potential evapotranspiration time series (areal averages over the river catchment area) and returns a simulated time series of river discharges. It can be used to understand the variability of expected hydrological responses based on model structures. 
+
+This package is an implementation of the framework for hydrological modelling FUSE described in Clark et al. (2008) and based on the Fortran code provided by M. Clark in 2011. The package consists of two modules: Soil Moisture Accounting module (fusesma.sim) and Gamma routing module (fuserouting.sim). It also contains default parameter ranges (fusesma.ranges and fuserouting.ranges) and three data objects: fuse_hydrological_timeseries (sample input dataset), parameters (sample parameters) and modlist (list of FUSE model structures).
 
 ### Dependencies
 The fuse package, as well as the examples in this vignette, depend on a number of CRAN packages. Check for missing dependencies and install them:

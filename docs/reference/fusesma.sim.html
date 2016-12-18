@@ -54,6 +54,9 @@
 <li>
   <a href="../articles/index.html">Articles</a>
 </li>
+<li>
+  <a href="../news/index.html">News</a>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -92,9 +95,9 @@
       <dt>DATA</dt>
       <dd>This is a data.frame containing the observed time series (zoo objects). It is structured into three columns containing: precipitation (P), potential evapo-transpiration (E) and streamflow discharge (Q).</dd>
       <dt>mid</dt>
-      <dd>This is the model identification number (see first column of <code>modlist</code>).</dd>
+      <dd>This is the model identification number (see first column of <code>modlist</code>). This is a numeric value in the range [1, 1248].</dd>
       <dt>deltim</dt>
-      <dd>This is the input time step. By default deltim = 1 for daily steps. Other options: 1/24 (hourly time step), 1/(24*4) (15 min time step).</dd>
+      <dd>This is the input time step (numeric value). By default deltim = 1 for daily steps. Other options: 1/24 (hourly time step), 1/(24*4) (15 min time step).</dd>
       <dt>rferr_add</dt>
       <dd>Additive rainfall error, default is 0 (mm day-1).</dd>
       <dt>rferr_mlt</dt>

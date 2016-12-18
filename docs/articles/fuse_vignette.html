@@ -21,6 +21,9 @@
 <li>
   <a href="../articles/index.html">Articles</a>
 </li>
+<li>
+  <a href="../news/index.html">News</a>
+</li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
   <a href="https://github.com/cvitolo/fuse">
     <span class="fa fa-github fa-lg"></span>
@@ -46,7 +49,8 @@
 <div class="contents">
 <div id="introduction" class="section level1">
 <h1 class="hasAnchor"><html><body><a href="#introduction" class="anchor"> </a></body></html>Introduction</h1>
-<p>Implementation of the framework for hydrological modelling FUSE described in Clark et al. (2008) and based on the Fortran code provided by M. Clark in 2011. The package consists of two modules: Soil Moisture Accounting module (fusesma.sim) and Gamma routing module (fuserouting.sim). It also contains default parameter ranges (fusesma.ranges and fuserouting.ranges) and three data objects: fuse_hydrological_timeseries (sample input dataset), parameters (sample parameters) and modlist (list of FUSE model structures).</p>
+<p>The fuse modelling framework takes as input rainfall and potential evapotranspiration time series (areal averages over the river catchment area) and returns a simulated time series of river discharges. It can be used to understand the variability of expected hydrological responses based on model structures.</p>
+<p>This package is an implementation of the framework for hydrological modelling FUSE described in Clark et al. (2008) and based on the Fortran code provided by M. Clark in 2011. The package consists of two modules: Soil Moisture Accounting module (fusesma.sim) and Gamma routing module (fuserouting.sim). It also contains default parameter ranges (fusesma.ranges and fuserouting.ranges) and three data objects: fuse_hydrological_timeseries (sample input dataset), parameters (sample parameters) and modlist (list of FUSE model structures).</p>
 <div id="dependencies" class="section level3">
 <h3 class="hasAnchor"><html><body><a href="#dependencies" class="anchor"> </a></body></html>Dependencies</h3>
 <p>The fuse package, as well as the examples in this vignette, depend on a number of CRAN packages. Check for missing dependencies and install them:</p>
