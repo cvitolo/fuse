@@ -7,13 +7,13 @@
 fuserouting.sim(U, mid, deltim, timedelay)
 }
 \arguments{
-\item{U}{This is the effective rainfall/instantaneous runoff, which is the sum of surface runoff, overflow, interflow, and baseflow.}
+\item{U}{This is the effective rainfall/instantaneous runoff, which is the sum of surface runoff, overflow, interflow, and baseflow. This vector can either be of class zoo or numeric.}
 
-\item{mid}{This is the model identification number (see first column of \code{modlist}).}
+\item{mid}{This is the model identification number (see first column of \code{modlist}). This is a numeric value in the range [1, 1248].}
 
-\item{deltim}{This is the input time step. By default deltim = 1 for daily steps. All options: deltim = 1 (daily time step), 1/24 (hourly time step), 1/24/4 (15 min time step).}
+\item{deltim}{This is the input time step. By default deltim = 1 for daily steps. All options: deltim = 1 (daily time step), 1/24 (hourly time step), 1/24/4 (15 min time step). This is a numeric value.}
 
-\item{timedelay}{Time delay in runoff (days).}
+\item{timedelay}{Time delay in runoff (days). This is a numeric value.}
 }
 \value{
 The function returns an array of simulated "routed" discharges. It can be used after calculating instantaneous discharges with \code{fusesma.sim}.
