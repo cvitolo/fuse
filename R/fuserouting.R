@@ -4,7 +4,7 @@
 #'
 #' @param U This is the effective rainfall/instantaneous runoff, which is the sum of surface runoff, overflow, interflow, and baseflow. This vector can either be of class zoo or numeric.
 #' @param mid This is the model identification number (see first column of \code{modlist}). This is a numeric value in the range [1, 1248].
-#' @param deltim This is the input time step. By default deltim = 1 for daily steps. All options: deltim = 1 (daily time step), 1/24 (hourly time step), 1/24/4 (15 min time step). This is a numeric value.
+#' @param deltim This is the input time step (numeric value). By default deltim = 1 for daily steps. All options: deltim = 1 (daily time step), 1/24 (hourly time step), 1/24/4 (15 min time step).
 #' @param timedelay Time delay in runoff (days). This is a numeric value.
 #'
 #' @details fuserouting.sim() is a routing module based on a two parameter Gamma distribution. It takes in input the instantaneous discharge and returns the routed discharge. It is compatible with the HYDROMAD framework (see hydromad package: http://hydromad.catchment.org/). For more information on suggested parameter ranges see Clark et al. 2011. Also see \code{GenerateFUSEParameters}.

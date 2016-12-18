@@ -3,8 +3,8 @@
 #' @description Implementation of the Soil Moisture Accounting module of the framework for hydrological modelling FUSE. This loss module is derived from the Fortran version of FUSE by Martyn Clark (2011).
 #'
 #' @param DATA This is a data.frame containing the observed time series (zoo objects). It is structured into three columns containing: precipitation (P), potential evapo-transpiration (E) and streamflow discharge (Q).
-#' @param mid This is the model identification number (see first column of \code{modlist}).
-#' @param deltim This is the input time step. By default deltim = 1 for daily steps. Other options: 1/24 (hourly time step), 1/(24*4) (15 min time step).
+#' @param mid This is the model identification number (see first column of \code{modlist}). This is a numeric value in the range [1, 1248].
+#' @param deltim This is the input time step (numeric value). By default deltim = 1 for daily steps. Other options: 1/24 (hourly time step), 1/(24*4) (15 min time step).
 #' @param rferr_add Additive rainfall error, default is 0 (mm day-1).
 #' @param rferr_mlt Multiplicative rainfall error, default is 1 (-).
 #' @param frchzne Fraction of tension storage in recharge zone (-).
