@@ -253,6 +253,8 @@ modfit <- fitBySCE(modspec)
 summary(modfit)
 ```
 
+With hydromad is also possible to perform a thorough model assessment using basic statistics as well as summary plots. There is also a wide set of tools for calibration and a suite of other utility functions. The reader should refer to the official website and documentation for more details.
+
 # Other packages and future developments
 The fuse package could in future be submitted to CRAN and included in the Task View dedicated to Analysis of Ecological and Environmental Data (Envirometrics). This already includes a number of packages for hydrological modelling such as [topmodel](https://CRAN.R-project.org/package=topmodel), [dynatopmodel](https://CRAN.R-project.org/package=dynatopmodel) and [wasim](https://CRAN.R-project.org/package=wasim). These packages only implement a single model structures,while fuse would complement them providing a framework for ensemble modelling. [Hydromad](http://hydromad.catchment.org/) also implements ensemble modelling but it is not currently on CRAN.
 
