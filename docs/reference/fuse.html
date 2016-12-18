@@ -78,7 +78,7 @@
     </div>
 
     
-    <p>Implementation of the framework for hydrological modelling FUSE, based on the Fortran version described in Clark et al. (2008). The package consists of two modules: Soil Moisture Accounting module (<code>fuse.sim</code>) and Gamma routing module (<code>routgamma.sim</code>). It also contains default parameter ranges (see <code>fuse.ranges</code> and <code>routgamma.ranges</code>) and three data objects: DATA, parameters and modlist.</p>
+    <p>Implementation of the framework for hydrological modelling FUSE, based on the Fortran version described in Clark et al. (2008). The package consists of two modules: Soil Moisture Accounting module (<code>fuse.sim</code>) and Gamma routing module (<code>routgamma.sim</code>). It also contains default parameter ranges (see <code>fuse.ranges</code> and <code>routgamma.ranges</code>) and three data objects: fuse_hydrological_timeseries, parameters and modlist.</p>
 
     <p>Combine FUSE soil moisture accounting module and routing module in one function</p>
     
@@ -109,10 +109,10 @@ Rainfall (P), Potential Evapo-Transpiration (E) and Streamflow (Q)</dd>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## Not run: ------------------------------------</span>
-<span class='co'># data(DATA)</span>
+<span class='co'># data(fuse_hydrological_timeseries)</span>
 <span class='co'># set.seed(123)</span>
 <span class='co'># parameters &lt;- generateParameters(1)</span>
-<span class='co'># Q &lt;- fuse(DATA, 60, 1, parameters)</span>
+<span class='co'># Q &lt;- fuse(fuse_hydrological_timeseries, 60, 1, parameters)</span>
 <span class='co'>## ---------------------------------------------</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

@@ -252,3 +252,8 @@ modfit <- fitBySCE(modspec)
 # Get a summary of the result
 summary(modfit)
 ```
+
+# Other packages and future developments
+The fuse package could in future be submitted to CRAN and included in the Task View dedicated to Analysis of Ecological and Environmental Data (Envirometrics). This already includes a number of packages for hydrological modelling such as [topmodel](https://CRAN.R-project.org/package=topmodel), [dynatopmodel](https://CRAN.R-project.org/package=dynatopmodel) and [wasim](https://CRAN.R-project.org/package=wasim). These packages only implement a single model structures,while fuse would complement them providing a framework for ensemble modelling. [Hydromad](http://hydromad.catchment.org/) also implements ensemble modelling but it is not currently on CRAN.
+
+A new version of the fuse Fortran code was recently released on [GitHub](https://github.com/naddor/fuse). Fortran users are advised to refer to this latest version of fuse. This package is not an interface for the latest Fortran code but any contribution in this direction is welcome.

@@ -46,7 +46,7 @@
 <div class="contents">
 <div id="introduction" class="section level1">
 <h1 class="hasAnchor"><html><body><a href="#introduction" class="anchor"> </a></body></html>Introduction</h1>
-<p>Implementation of the framework for hydrological modelling FUSE described in Clark et al. (2008) and based on the Fortran code provided by M. Clark in 2011. The package consists of two modules: Soil Moisture Accounting module (fusesma.sim) and Gamma routing module (fuserouting.sim). It also contains default parameter ranges (fusesma.ranges and fuserouting.ranges) and three data objects: DATA (sample input dataset), parameters (sample parameters) and modlist (list of FUSE model structures).</p>
+<p>Implementation of the framework for hydrological modelling FUSE described in Clark et al. (2008) and based on the Fortran code provided by M. Clark in 2011. The package consists of two modules: Soil Moisture Accounting module (fusesma.sim) and Gamma routing module (fuserouting.sim). It also contains default parameter ranges (fusesma.ranges and fuserouting.ranges) and three data objects: fuse_hydrological_timeseries (sample input dataset), parameters (sample parameters) and modlist (list of FUSE model structures).</p>
 <div id="dependencies" class="section level3">
 <h3 class="hasAnchor"><html><body><a href="#dependencies" class="anchor"> </a></body></html>Dependencies</h3>
 <p>The fuse package, as well as the examples in this vignette, depend on a number of CRAN packages. Check for missing dependencies and install them:</p>
@@ -65,7 +65,7 @@ if(<span class="kw">length</span>(new.packages)) <span class="kw">install.packag
 <div id="data-and-parameters" class="section level3">
 <h3 class="hasAnchor"><html><body><a href="#data-and-parameters" class="anchor"> </a></body></html>Data and parameters</h3>
 <p>Load sample data (daily time step)</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(DATA)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(fuse_hydrological_timeseries)
 myDELTIM &lt;-<span class="st"> </span><span class="dv">1</span></code></pre></div>
 <p>Define parameter ranges</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DefaultRanges &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">t</span>(<span class="kw">data.frame</span>(<span class="kw">c</span>(<span class="kw"><a href="../reference/fusesma.ranges.html">fusesma.ranges</a></span>(),
@@ -85,24 +85,25 @@ parameters &lt;-<span class="st"> </span><span class="kw"><a href="../reference/
 <p>Define the model to use, e.g.&nbsp;TOPMODEL (MID = 60)</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">myMID &lt;-<span class="st"> </span><span class="dv">60</span></code></pre></div>
 <p>Use the built-in function to run FUSE for the 1st sampled parameter set</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">streamflow &lt;-<span class="st"> </span><span class="kw"><a href="../reference/fuse.html">fuse</a></span>(DATA, myMID, myDELTIM, parameters[<span class="dv">1</span>,])
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">streamflow &lt;-<span class="st"> </span><span class="kw"><a href="../reference/fuse.html">fuse</a></span>(fuse_hydrological_timeseries, myMID, myDELTIM, parameters[<span class="dv">1</span>,])
 
 <span class="kw">plot</span>(streamflow, <span class="dt">xlab =</span> <span class="st">""</span>, <span class="dt">ylab =</span> <span class="st">"Streamflow [mm/day]"</span>)</code></pre></div>
 <p><img src="fuse_vignette_files/figure-html/unnamed-chunk-10-1.png" width="672"></p>
 <p>Run FUSE for all the sampled parameter sets</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(DATA$Q, <span class="dt">type =</span> <span class="st">"l"</span>, <span class="dt">xlab =</span> <span class="st">""</span>, <span class="dt">ylab =</span> <span class="st">"Streamflow [mm/day]"</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(fuse_hydrological_timeseries$Q, <span class="dt">type =</span> <span class="st">"l"</span>, 
+     <span class="dt">xlab =</span> <span class="st">""</span>, <span class="dt">ylab =</span> <span class="st">"Streamflow [mm/day]"</span>)
 
 for (i in <span class="dv">1</span>:<span class="kw">dim</span>(parameters)[<span class="dv">1</span>]){
   
-  <span class="kw">lines</span>(zoo::<span class="kw">zoo</span>(<span class="kw"><a href="../reference/fuse.html">fuse</a></span>(<span class="dt">DATA =</span> DATA, 
+  <span class="kw">lines</span>(zoo::<span class="kw">zoo</span>(<span class="kw"><a href="../reference/fuse.html">fuse</a></span>(<span class="dt">DATA =</span> fuse_hydrological_timeseries, 
                       <span class="dt">mid =</span> myMID, 
                       <span class="dt">deltim =</span> myDELTIM, 
                       <span class="dt">ParameterSet =</span> parameters[i,]), 
-                 <span class="dt">order.by =</span> zoo::<span class="kw">index</span>(DATA)),
+                 <span class="dt">order.by =</span> zoo::<span class="kw">index</span>(fuse_hydrological_timeseries)),
         <span class="dt">col =</span> <span class="st">"gray"</span>, <span class="dt">lwd =</span> <span class="fl">0.1</span>)
   
 }
-<span class="kw">lines</span>(DATA$Q, <span class="dt">col =</span> <span class="st">"black"</span>)</code></pre></div>
+<span class="kw">lines</span>(fuse_hydrological_timeseries$Q, <span class="dt">col =</span> <span class="st">"black"</span>)</code></pre></div>
 <p><img src="fuse_vignette_files/figure-html/unnamed-chunk-11-1.png" width="672"></p>
 </div>
 <div id="ensemble-modelling" class="section level3">
@@ -111,7 +112,7 @@ for (i in <span class="dv">1</span>:<span class="kw">dim</span>(parameters)[<spa
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mids &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">60</span>, <span class="dv">230</span>, <span class="dv">342</span>, <span class="dv">426</span>)</code></pre></div>
 <p>Run a multi-model calibration using the Nash-Sutcliffe efficiency as objective function</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">indices &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="ot">NA</span>, <span class="dv">4</span>*<span class="kw">dim</span>(parameters)[<span class="dv">1</span>])
-discharges &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="ot">NA</span>, <span class="dt">ncol =</span> <span class="dv">4</span>*<span class="kw">dim</span>(parameters)[<span class="dv">1</span>], <span class="dt">nrow =</span> <span class="kw">dim</span>(DATA)[<span class="dv">1</span>])
+discharges &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="ot">NA</span>, <span class="dt">ncol =</span> <span class="dv">4</span>*<span class="kw">dim</span>(parameters)[<span class="dv">1</span>], <span class="dt">nrow =</span> <span class="kw">dim</span>(fuse_hydrological_timeseries)[<span class="dv">1</span>])
 kCounter &lt;-<span class="st"> </span><span class="dv">0</span>
 
 for (m in <span class="dv">1</span>:<span class="dv">4</span>){
@@ -122,12 +123,12 @@ for (m in <span class="dv">1</span>:<span class="dv">4</span>){
 
     kCounter &lt;-<span class="st"> </span>kCounter +<span class="st"> </span><span class="dv">1</span>
     
-    Qrout &lt;-<span class="st"> </span><span class="kw"><a href="../reference/fuse.html">fuse</a></span>(<span class="dt">DATA =</span> DATA, 
+    Qrout &lt;-<span class="st"> </span><span class="kw"><a href="../reference/fuse.html">fuse</a></span>(<span class="dt">DATA =</span> fuse_hydrological_timeseries, 
                   <span class="dt">mid =</span> myMID, 
                   <span class="dt">deltim =</span> myDELTIM, 
                   <span class="dt">ParameterSet =</span> parameters[pid, ])
  
-    indices[kCounter] &lt;-<span class="st"> </span>qualV::<span class="kw">EF</span>(DATA$Q, Qrout)  
+    indices[kCounter] &lt;-<span class="st"> </span>qualV::<span class="kw">EF</span>(fuse_hydrological_timeseries$Q, Qrout)  
     discharges[, kCounter] &lt;-<span class="st"> </span>Qrout
     
     }
@@ -156,7 +157,7 @@ bestModel &lt;-<span class="st"> </span>function(runNumber){
 <span class="kw">bestModel</span>(bestRun)
 <span class="co">#&gt; [1] "SACRAMENTO"</span>
  
-<span class="kw">plot</span>(zoo::<span class="kw">coredata</span>(DATA$Q), <span class="dt">type =</span> <span class="st">"l"</span>, <span class="dt">lwd=</span><span class="fl">0.5</span>, 
+<span class="kw">plot</span>(zoo::<span class="kw">coredata</span>(fuse_hydrological_timeseries$Q), <span class="dt">type =</span> <span class="st">"l"</span>, <span class="dt">lwd=</span><span class="fl">0.5</span>, 
      <span class="dt">xlab =</span> <span class="st">""</span>, <span class="dt">ylab =</span> <span class="st">"Streamflow [mm/day]"</span>)
  
 for(pid in <span class="dv">1</span>:(<span class="dv">4</span>*numberOfRuns)){
@@ -165,7 +166,7 @@ for(pid in <span class="dv">1</span>:(<span class="dv">4</span>*numberOfRuns)){
   
 }
  
-<span class="kw">lines</span>(zoo::<span class="kw">coredata</span>(DATA$Q), <span class="dt">col =</span> <span class="st">"black"</span>, <span class="dt">lwd =</span> <span class="dv">1</span>)
+<span class="kw">lines</span>(zoo::<span class="kw">coredata</span>(fuse_hydrological_timeseries$Q), <span class="dt">col =</span> <span class="st">"black"</span>, <span class="dt">lwd =</span> <span class="dv">1</span>)
 <span class="kw">lines</span>(discharges[, bestRun], <span class="dt">col =</span> <span class="st">"red"</span>, <span class="dt">lwd =</span> <span class="dv">1</span>)</code></pre></div>
 <p><img src="fuse_vignette_files/figure-html/unnamed-chunk-14-1.png" width="672"></p>
 <p>How the best simulation of each model structure compare to each other?</p>
@@ -183,7 +184,7 @@ bestRun0426 &lt;-<span class="st"> </span><span class="dv">3</span>*numberOfRuns
 <span class="st">  </span><span class="kw">which</span>(indices[(<span class="dv">3</span>*numberOfRuns<span class="dv">+1</span>):(<span class="dv">4</span>*numberOfRuns)] ==
 <span class="st">          </span><span class="kw">max</span>(indices[(<span class="dv">3</span>*numberOfRuns<span class="dv">+1</span>):(<span class="dv">4</span>*numberOfRuns)]))
 
-<span class="kw">plot</span>(zoo::<span class="kw">coredata</span>(DATA$Q), <span class="dt">type =</span> <span class="st">"l"</span>, <span class="dt">lwd=</span><span class="dv">1</span>,
+<span class="kw">plot</span>(zoo::<span class="kw">coredata</span>(fuse_hydrological_timeseries$Q), <span class="dt">type =</span> <span class="st">"l"</span>, <span class="dt">lwd=</span><span class="dv">1</span>,
      <span class="dt">xlab =</span> <span class="st">""</span>, <span class="dt">ylab =</span> <span class="st">"Streamflow [mm/day]"</span>)
 <span class="kw">lines</span>(discharges[, bestRun0060], <span class="dt">col =</span> <span class="st">"green"</span>, <span class="dt">lwd =</span> <span class="dv">1</span>)
 <span class="kw">lines</span>(discharges[, bestRun0230], <span class="dt">col =</span> <span class="st">"blue"</span>, <span class="dt">lwd =</span> <span class="dv">1</span>)
@@ -209,14 +210,14 @@ bestRun0426 &lt;-<span class="st"> </span><span class="dv">3</span>*numberOfRuns
 
 <span class="co"># Load fuse and an example dataset</span>
 <span class="kw">library</span>(fuse)
-<span class="kw">data</span>(DATA)
+<span class="kw">data</span>(fuse_hydrological_timeseries)
 
 <span class="co"># Set the parameter ranges using hydromad.options</span>
 <span class="kw">hydromad.options</span>(<span class="dt">fusesma =</span> <span class="kw"><a href="../reference/fusesma.ranges.html">fusesma.ranges</a></span>(),
                  <span class="dt">fuserouting =</span> <span class="kw"><a href="../reference/fuserouting.ranges.html">fuserouting.ranges</a></span>())
 
 <span class="co"># Set up the model</span>
-modspec &lt;-<span class="st"> </span><span class="kw">hydromad</span>(DATA,
+modspec &lt;-<span class="st"> </span><span class="kw">hydromad</span>(fuse_hydrological_timeseries,
                     <span class="dt">sma =</span> <span class="st">"fusesma"</span>, 
                     <span class="dt">routing =</span> <span class="st">"fuserouting"</span>, 
                     <span class="dt">mid =</span> <span class="dv">1</span>:<span class="dv">1248</span>, 
@@ -249,6 +250,11 @@ modfit &lt;-<span class="st"> </span><span class="kw">fitBySCE</span>(modspec)
 <span class="co"># Get a summary of the result</span>
 <span class="kw">summary</span>(modfit)</code></pre></div>
 </div>
+<div id="other-packages-and-future-developments" class="section level1">
+<h1 class="hasAnchor"><html><body><a href="#other-packages-and-future-developments" class="anchor"> </a></body></html>Other packages and future developments</h1>
+<p>The fuse package could in future be submitted to CRAN and included in the Task View dedicated to Analysis of Ecological and Environmental Data (Envirometrics). This already includes a number of packages for hydrological modelling such as <a href="https://CRAN.R-project.org/package=topmodel">topmodel</a>, <a href="https://CRAN.R-project.org/package=dynatopmodel">dynatopmodel</a> and <a href="https://CRAN.R-project.org/package=wasim">wasim</a>. These packages only implement a single model structures,while fuse would complement them providing a framework for ensemble modelling. <a href="http://hydromad.catchment.org/">Hydromad</a> also implements ensemble modelling but it is not currently on CRAN.</p>
+<p>A new version of the fuse Fortran code was recently released on <a href="https://github.com/naddor/fuse">GitHub</a>. Fortran users are advised to refer to this latest version of fuse. This package is not an interface for the latest Fortran code but any contribution in this direction is welcome.</p>
+</div>
 </div>
   </div>
 
@@ -257,6 +263,7 @@ modfit &lt;-<span class="st"> </span><span class="kw">fitBySCE</span>(modspec)
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked"><li><a href="#introduction">Introduction</a></li>
       <li><a href="#use-fuse-with-hydromad">Use fuse with hydromad</a></li>
+      <li><a href="#other-packages-and-future-developments">Other packages and future developments</a></li>
       </ul></div>
       </div>
 

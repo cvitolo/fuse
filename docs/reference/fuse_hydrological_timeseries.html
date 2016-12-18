@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Read Model Decisions — readmd • fuse</title>
+<title>FUSE dummy dataset — fuse_hydrological_timeseries • fuse</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -74,38 +74,41 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Read Model Decisions</h1>
+    <h1>FUSE dummy dataset</h1>
     </div>
 
     
-    <p>readmd is used for reporting, to generate tables (usually via xtable) to list model structures and describe each component.</p>
+    <p>This dataset consists of a data.frame with 3 columns: P (precipitation time series), E(potential evapo-transpiration time series), Q(discharge time series).</p>
     
 
-    <pre><span class='fu'>readmd</span>(<span class='no'>mid</span>)</pre>
-    
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <dl class="dl-horizontal">
-      <dt>mid</dt>
-      <dd>model id number in Model List 2011(see below for details)</dd>
-    </dl>
-    
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+        
+    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>prints on the screen a description of the selected model</p>
+    <p>The format is: &#39;zoo&#39; series from 2000-01-01 to 2002-12-31
+The data consists of a numeric data.frame with 1096 rows and 3 columns named: &quot;P&quot;, &quot;E&quot; and &quot;Q&quot;. The temporal index consist of daily dates from &quot;2000-01-01&quot; to &quot;2000-01-05&quot;.</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Data set: fuse_hydrological_timeseries</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>## Not run: ------------------------------------</span>
-<span class='co'># # To read the model components corresponding to a given id:</span>
-<span class='co'># readmd(mid = 5)</span>
-<span class='co'>## ---------------------------------------------</span></div></pre>
+    <pre class="examples"><div class='input'><span class='fu'>data</span>(<span class='no'>fuse_hydrological_timeseries</span>)
+<span class='fu'>str</span>(<span class='no'>fuse_hydrological_timeseries</span>)</div><div class='output co'>#&gt; ‘zoo’ series from 2000-01-01 to 2002-12-31
+#&gt;   Data: num [1:1096, 1:3] 1.52 0.2 0 0.5 7.83 4.68 0.78 4.55 2.18 4.53 ...
+#&gt;  - attr(*, &quot;dimnames&quot;)=List of 2
+#&gt;   ..$ : NULL
+#&gt;   ..$ : chr [1:3] &quot;P&quot; &quot;E&quot; &quot;Q&quot;
+#&gt;   Index:  Date[1:1096], format: &quot;2000-01-01&quot; &quot;2000-01-02&quot; &quot;2000-01-03&quot; &quot;2000-01-04&quot; ...</div><div class='input'><span class='fu'>plot</span>(<span class='no'>fuse_hydrological_timeseries</span>)</div><img src='fuse_hydrological_timeseries-4.png' alt='' width='540' height='400' /><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#value">Value</a></li>
+      <li><a href="#format">Format</a></li>
+
+      <li><a href="#details">Details</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>
