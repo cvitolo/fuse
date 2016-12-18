@@ -1,4 +1,4 @@
-context("Data")
+context("test-fuse")
 
 test_that("Single run", {
 
@@ -9,11 +9,13 @@ test_that("Single run", {
   set.seed(1)
   parameters <- generateParameters(1)
 
-  x <- round(coredata(fuse(DATA = fuse_hydrological_timeseries, mid = myMID, deltim = myDELTIM,
-            ParameterSet = parameters)), 3)
+  x <- round(zoo::coredata(fuse(DATA = fuse_hydrological_timeseries,
+                                mid = myMID,
+                                deltim = myDELTIM,
+                                ParameterSet = parameters)), 3)
 
   # dput(x, 'fuse/inst/tests/testthat/example01')
-  y <- dget(system.file(package = 'fuse', 'inst/tests/testthat/example01'))
+  y <- dget(system.file(package = 'fuse', 'tests/testthat/example01'))
 
   expect_that(all(x==y), equals(TRUE))
 
@@ -47,7 +49,7 @@ test_that("Ensemble run", {
   }
 
   # dput(discharges, 'fuse/inst/tests/testthat/example02')
-  y <- dget(system.file(package = 'fuse', 'inst/tests/testthat/example02'))
+  y <- dget(system.file(package = 'fuse', 'tests/testthat/example02'))
 
   expect_that(all(discharges==y), equals(TRUE))
 
