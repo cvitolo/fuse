@@ -26,4 +26,10 @@ The fuse framework takes as input rainfall and potential evapotranspiration time
 
 The package contains default parameter ranges (fusesma.ranges and fuserouting.ranges) and three data objects: fuse_hydrological_timeseries (sample input dataset), parameters (sample parameters) and modlist (list of FUSE model structures).
 
+An early version of this package was used as modelling backend of web applications for the Environmental Virtual Observatory pilot project[@Vitolo2015185,@Wilkinson201538].
+
+The fuse package could in future be submitted to CRAN and included in the Task View dedicated to Analysis of Ecological and Environmental Data (Envirometrics). This already includes a number of packages for hydrological modelling such as [@topmodel], [@dynatopmodel] and [@wasim]. These packages only implement a single model structures,while fuse would complement them providing a framework for ensemble modelling. The package hydromad [@Andrews20111171] also implements ensemble modelling but it is not currently on CRAN.
+
+A new version of the fuse Fortran code was recently released on [GitHub](https://github.com/naddor/fuse). Fortran users are advised to refer to this latest version of fuse. This package is not an interface for the latest Fortran code but any contribution in this direction is welcome.
+
 # References
