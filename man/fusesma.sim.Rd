@@ -13,9 +13,9 @@ fusesma.sim(DATA, mid, deltim, rferr_add = 0, rferr_mlt = 1, frchzne,
 \arguments{
 \item{DATA}{This is a data.frame containing the observed time series (zoo objects). It is structured into three columns containing: precipitation (P), potential evapo-transpiration (E) and streamflow discharge (Q).}
 
-\item{mid}{This is the model identification number (see first column of \code{modlist}).}
+\item{mid}{This is the model identification number (see first column of \code{modlist}). This is a numeric value in the range [1, 1248].}
 
-\item{deltim}{This is the input time step. By default deltim = 1 for daily steps. Other options: 1/24 (hourly time step), 1/(24*4) (15 min time step).}
+\item{deltim}{This is the input time step (numeric value). By default deltim = 1 for daily steps. Other options: 1/24 (hourly time step), 1/(24*4) (15 min time step).}
 
 \item{rferr_add}{Additive rainfall error, default is 0 (mm day-1).}
 

@@ -11,7 +11,7 @@ fuserouting.sim(U, mid, deltim, timedelay)
 
 \item{mid}{This is the model identification number (see first column of \code{modlist}). This is a numeric value in the range [1, 1248].}
 
-\item{deltim}{This is the input time step. By default deltim = 1 for daily steps. All options: deltim = 1 (daily time step), 1/24 (hourly time step), 1/24/4 (15 min time step). This is a numeric value.}
+\item{deltim}{This is the input time step (numeric value). By default deltim = 1 for daily steps. All options: deltim = 1 (daily time step), 1/24 (hourly time step), 1/24/4 (15 min time step).}
 
 \item{timedelay}{Time delay in runoff (days). This is a numeric value.}
 }
