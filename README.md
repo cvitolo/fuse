@@ -7,9 +7,11 @@ fuse: an R package implementing the Framework for Understanding Structural Error
 
 [![Build Status](https://travis-ci.org/cvitolo/fuse.svg)](https://travis-ci.org/cvitolo/fuse.svg?branch=master) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/cvitolo/fuse?branch=master&svg=true)](https://ci.appveyor.com/project/cvitolo/fuse) [![codecov.io](https://codecov.io/github/cvitolo/fuse/coverage.svg?branch=master)](https://codecov.io/github/cvitolo/fuse?branch=master)
 
-The fuse modelling framework takes as input rainfall and potential evapotranspiration time series (areal averages over the river catchment area) and returns a simulated time series of river discharges. It can be used to understand the variability of expected hydrological responses based on model structures.
+The Framework for Understanding Structural Errors (FUSE) was developed by Clark et al. (2008) and is a state-of-the-art modelling toolbox. It includes 1248 hydrological model structures, amongst which some well established models for rainfall-runoff simulations (i.e. PRMS, SACRAMENTO, TOPMODEL and ARNO/VIC, also defined as parent models). Each model is characterised by a different architecture of the upper and lower soil layers and parameterisation of processes such as: evaporation, vertical percolation, interflow, base flow and surface runoff.
 
-This package is an implementation of the framework for hydrological modelling FUSE described in Clark et al. (2008) and based on the Fortran code provided by M. Clark in 2011. The package consists of two modules: Soil Moisture Accounting module (fusesma.sim) and Gamma routing module (fuserouting.sim). It also contains default parameter ranges (fusesma.ranges and fuserouting.ranges) and three data objects: fuse\_hydrological\_timeseries (sample input dataset), parameters (sample parameters) and modlist (list of FUSE model structures).
+Fuse takes as input rainfall and potential evapotranspiration time series (areal averages over the river catchment area) and returns a simulated time series of river discharges. It can be used to understand the variability of expected hydrological responses based on model structures.
+
+This package is a re-implementation of the framework described in Clark et al. (2008) and based on the Fortran code provided by M. Clark in 2011. The package consists of two modules: Soil Moisture Accounting module (fusesma.sim) and Gamma routing module (fuserouting.sim). It also contains default parameter ranges (fusesma.ranges and fuserouting.ranges) and three data objects: fuse\_hydrological\_timeseries (sample input dataset), parameters (sample parameters) and modlist (list of FUSE model structures).
 
 ### Dependencies
 
