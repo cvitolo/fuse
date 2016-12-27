@@ -1,0 +1,52 @@
+navbar:
+  title: ~
+  type: default
+  left:
+  - text: Reference
+    href: reference/index.html
+  - text: Articles
+    menu:
+    - text: JOSS paper
+      href: http://dx.doi.org/10.21105/joss.00052
+    - text: Vignette
+      href: articles/index.html
+  - text: News
+    href: news/index.html
+  right:
+  - icon: fa-github fa-lg
+    href: https://github.com/cvitolo/fuse/
+
+reference:
+- title: Core functions
+  desc: >
+    The soil moisture accounting module, the routing module, default parameter ranges and the wrapper function.
+  contents:
+  - fuse
+  - fuserouting.ranges
+  - fuserouting.sim
+  - fusesma.ranges
+  - fusesma.sim
+
+- title: Utility functions
+  desc: >
+    Functions to explore model structure variability.
+  contents:
+  - fuseInfo
+  - generateParameters
+  - model_param_table
+  - readmd2var
+  - readmd
+
+- title: Sample data and look-up tables
+  desc: >
+    Sample daily data and parameter set to run tests in the vignette and README file.
+  contents:
+  - fuse_hydrological_timeseries
+  - fuse_parameters
+  - modlist
+  - modliststring
+
+articles:
+- title: All articles
+  desc: ~
+  contents: fuse_vignette
