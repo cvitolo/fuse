@@ -79,3 +79,4 @@ Fortran users are advised to refer to the latest version of fuse available [here
 * Please [report any issues or bugs](https://github.com/cvitolo/fuse/issues).
 * License: [GPL-3](https://opensource.org/licenses/GPL-3.0)
 * Get citation information for the `fuse` package in R doing `citation(package = 'fuse')`
+* This package was reviewed by [Maëlle Salmon](https://github.com/masalmon) for the Journal of Open Source Software, see review [here](https://github.com/openjournals/joss-reviews/issues/52).
