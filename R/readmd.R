@@ -18,7 +18,7 @@
 readmd <- function(mid) {
 
   # load list of availabe models
-  # load(system.file("data/modlist.rda", package = "fuse"))
+  load(system.file("data/modlist.rda", package = "fuse"))
   modlist <- modlist # to remove NOTE in R CMD check
 
    selectedmodel<-list("rferr"=modlist[mid,2],
@@ -95,7 +95,7 @@ readmd <- function(mid) {
 readmd2var <- function(mid,number=FALSE) {
 
   # load list of availabe models
-  # load(system.file("data/modlist.rda", package = "fuse"))
+  load(system.file("data/modlist.rda", package = "fuse"))
   modlist <- modlist # to remove NOTE in R CMD check
 
   xnumber <- xtext <- c("rferr" = NA,

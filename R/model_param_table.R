@@ -12,7 +12,9 @@
 
 model_param_table <- function(reduced = FALSE){
 
-  modlist <- modlist
+  # load list of availabe models
+  load(system.file("data/modlist.rda", package = "fuse"))
+  modlist <- modlist # to remove NOTE in R CMD check
 
   if (reduced == TRUE) {
 

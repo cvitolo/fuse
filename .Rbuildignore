@@ -10,4 +10,7 @@ paper
 ^CONDUCT\.md$
 README_files
 _config.yml
+_pkgdown.yml
 docs
+src/fuse.so
+src/fuse.o

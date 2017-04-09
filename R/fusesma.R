@@ -75,105 +75,107 @@ fusesma.sim <- function(DATA, mid, deltim,
                         absError = 10^(-4),   # absolute solver error (default)
                         relError = 10^(-4),   # relative solver error (default)
                         StatesFluxes = FALSE){
-
-    ## Keep attributes, but work with raw matrix
-    inAttr <- attributes(DATA[, 1])
-    DATA <- zoo::coredata(DATA)
-
-    stopifnot(c("P","E") %in% colnames(DATA))
-    P <- DATA[,"P"]
-    E <- DATA[,"E"]
-
-    ## skip over missing values
-    #bad <- is.na(P) | is.na(E)
-    #P[bad] <- 0
-    #E[bad] <- 0
-
-    # list of availabe models is loaded by LazyData: true in DESCRIPTION
-    modlist <- modlist                           # to remove NOTE in R CMD check
-
-    # Make sure mid is an integer (needed for compatibility with hydromad)
-    mid <- round(mid,0)
-
-    # Read model structure [LIST]
-    smodl <- list("rferr"=modlist[mid,2],
-                  "arch1"=modlist[mid,3],
-                  "arch2"=modlist[mid,4],
-                  "qsurf"=modlist[mid,5],
-                  "qperc"=modlist[mid,6],
-                  "esoil"=modlist[mid,7],
-                  "qintf"=modlist[mid,8],
-                  "q_tdh"=modlist[mid,9])
-
-    res <- .C("fusesmaSimR",
-              as.double(P),
-              as.integer(length(P)),
-              as.double(E),
-              as.integer(length(E)),
-              as.integer(smodl),       # A (1d) array of ints (the model params)
-              as.integer(length(smodl)),
-              as.double(deltim),
-              as.double(frchzne),
-              as.double(fracten),
-              as.double(maxwatr_1),
-              as.double(percfrac),
-              as.double(fprimqb),
-              as.double(qbrate_2a),
-              as.double(qbrate_2b),
-              as.double(qb_prms),
-              as.double(maxwatr_2),
-              as.double(baserte),
-              as.double(rtfrac1),
-              as.double(percrte),
-              as.double(percexp),
-              as.double(sacpmlt),
-              as.double(sacpexp),
-              as.double(iflwrte),
-              as.double(axv_bexp),
-              as.double(sareamax),
-              as.double(loglamb),
-              as.double(tishape),
-              as.double(qb_powr),
-              stateResults = double( 10 * length(P) ),
-              fluxResults = double( 20 * length(P) ),
-              as.double(absError),
-              as.double(relError),
-              as.logical(FALSE),                        # correctNegVols = FALSE
-              as.double(fracstate0),
-              as.double(rferr_add),
-              as.double(rferr_mlt),
-              status = integer(1) , PACKAGE="fuse")
-
-    # TODO: add module for correction of negative values
-    # (now correctNegVols = FALSE)
-
-    if (res$status != 0){
-      stop("fusesmaSimR Failed!")
-    }
-
-    s <- res$stateResults
-    dim(s) <- c(length(P),10)
-    s <- data.frame( matrix(s,nrow=length(P),ncol=10,byrow=T) )
-
-    f <- res$fluxResults
-    dim(f) <- c(length(P),20)
-    f <- data.frame( matrix(f,nrow=length(P),ncol=20,byrow=T) )
-
-    results <- cbind(s,f)
-    names(results) <- c("tens_1a", "tens_1b", "tens_1", "free_1", "watr_1",
-                        "tens_2", "free_2a", "free_2b", "watr_2", "free_2",
-                        "eff_ppt", "satarea", "qsurf", "evap_1a", "evap_1b",
-                        "evap_1", "evap_2", "rchr2excs", "tens2free_1",
-                        "tens2free_2", "qintf_1", "qperc_12", "qbase_2",
-                        "qbase_2a", "qbase_2b", "oflow_1", "oflow_2",
-                        "oflow_2a", "oflow_2b", "U")
-
-    if (StatesFluxes == FALSE) {
-      results <- results$U
-      attributes(results) <- inAttr
-    }
-
-    return(results)
+  
+  # load list of availabe models
+  load(system.file("data/modlist.rda", package = "fuse"))
+  modlist <- modlist # to remove NOTE in R CMD check
+  
+  ## Keep attributes, but work with raw matrix
+  inAttr <- attributes(DATA[, 1])
+  DATA <- zoo::coredata(DATA)
+  
+  stopifnot(c("P","E") %in% colnames(DATA))
+  P <- DATA[,"P"]
+  E <- DATA[,"E"]
+  
+  ## skip over missing values
+  #bad <- is.na(P) | is.na(E)
+  #P[bad] <- 0
+  #E[bad] <- 0
+  
+  # Make sure mid is an integer (needed for compatibility with hydromad)
+  mid <- round(mid,0)
+  
+  # Read model structure [LIST]
+  smodl <- list("rferr"=modlist[mid,2],
+                "arch1"=modlist[mid,3],
+                "arch2"=modlist[mid,4],
+                "qsurf"=modlist[mid,5],
+                "qperc"=modlist[mid,6],
+                "esoil"=modlist[mid,7],
+                "qintf"=modlist[mid,8],
+                "q_tdh"=modlist[mid,9])
+  
+  res <- .C("fusesmaSimR",
+            as.double(P),
+            as.integer(length(P)),
+            as.double(E),
+            as.integer(length(E)),
+            as.integer(smodl),       # A (1d) array of ints (the model params)
+            as.integer(length(smodl)),
+            as.double(deltim),
+            as.double(frchzne),
+            as.double(fracten),
+            as.double(maxwatr_1),
+            as.double(percfrac),
+            as.double(fprimqb),
+            as.double(qbrate_2a),
+            as.double(qbrate_2b),
+            as.double(qb_prms),
+            as.double(maxwatr_2),
+            as.double(baserte),
+            as.double(rtfrac1),
+            as.double(percrte),
+            as.double(percexp),
+            as.double(sacpmlt),
+            as.double(sacpexp),
+            as.double(iflwrte),
+            as.double(axv_bexp),
+            as.double(sareamax),
+            as.double(loglamb),
+            as.double(tishape),
+            as.double(qb_powr),
+            stateResults = double( 10 * length(P) ),
+            fluxResults = double( 20 * length(P) ),
+            as.double(absError),
+            as.double(relError),
+            as.logical(FALSE),                        # correctNegVols = FALSE
+            as.double(fracstate0),
+            as.double(rferr_add),
+            as.double(rferr_mlt),
+            status = integer(1) , PACKAGE="fuse")
+  
+  # TODO: add module for correction of negative values
+  # (now correctNegVols = FALSE)
+  
+  if (res$status != 0){
+    stop("fusesmaSimR Failed!")
+  }
+  
+  s <- res$stateResults
+  dim(s) <- c(length(P),10)
+  s <- data.frame( matrix(s,nrow=length(P),ncol=10,byrow=T) )
+  
+  f <- res$fluxResults
+  dim(f) <- c(length(P),20)
+  f <- data.frame( matrix(f,nrow=length(P),ncol=20,byrow=T) )
+  
+  results <- cbind(s,f)
+  names(results) <- c("tens_1a", "tens_1b", "tens_1", "free_1", "watr_1",
+                      "tens_2", "free_2a", "free_2b", "watr_2", "free_2",
+                      "eff_ppt", "satarea", "qsurf", "evap_1a", "evap_1b",
+                      "evap_1", "evap_2", "rchr2excs", "tens2free_1",
+                      "tens2free_2", "qintf_1", "qperc_12", "qbase_2",
+                      "qbase_2a", "qbase_2b", "oflow_1", "oflow_2",
+                      "oflow_2a", "oflow_2b", "U")
+  
+  if (StatesFluxes == FALSE) {
+    results <- results$U
+    attributes(results) <- inAttr
+  }
+  
+  return(results)
+  
 }
 
 #' Function to define the parameter ranges for FUSE Soil Moisture Accounting module

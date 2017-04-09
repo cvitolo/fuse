@@ -19,7 +19,6 @@ Depends: R (>= 3.0.0)
 Imports: dplyr, zoo, tgp, stats, utils
 LinkingTo: BH, Rcpp
 Suggests: testthat
-LazyData: true
 Encoding: UTF-8
 License: GPL-3
 Repository: GitHub

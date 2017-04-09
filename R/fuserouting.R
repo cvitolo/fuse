@@ -39,42 +39,44 @@
 #'
 
 fuserouting.sim <- function(U, mid, deltim, timedelay) {
-
-   inAttr <- attributes(U)
-   U <- zoo::coredata(U)
-
-   # list of availabe models is loaded by LazyData: true in DESCRIPTION
-   modlist <- modlist                            # to remove NOTE in R CMD check
-
-   # Read model structure
-   smodl <- c(modlist[mid,2],    # rferr
-              modlist[mid,3],    # arch1
-              modlist[mid,4],    # arch2
-              modlist[mid,5],    # qsurf
-              modlist[mid,6],    # qperc
-              modlist[mid,7],    # esoil
-              modlist[mid,8],    # qintf
-              modlist[mid,9])    # q_tdh
-
-   res <- .C(  "fuseRoutingSimR",
-               as.double(U),
-               as.integer(length(U)),
-               as.integer(smodl),      # A (1d) array of ints (the model params)
-               as.integer(length(smodl)),
-               as.double(timedelay),
-               as.double(deltim),
-               X = double( length(U) ),
-               as.integer(length(U)),
-               status = integer(1), PACKAGE="fuse" )
-
-   if (res$status != 0){
-     stop("fuseRoutingSimR Failed!")
-   }
-
-   X <- res$X
-   attributes(X) <- inAttr
-
-   return(X)
+  
+  # load list of availabe models
+  load(system.file("data/modlist.rda", package = "fuse"))
+  modlist <- modlist # to remove NOTE in R CMD check
+  
+  inAttr <- attributes(U)
+  U <- zoo::coredata(U)
+  
+  # Read model structure
+  smodl <- c(modlist[mid,2],    # rferr
+             modlist[mid,3],    # arch1
+             modlist[mid,4],    # arch2
+             modlist[mid,5],    # qsurf
+             modlist[mid,6],    # qperc
+             modlist[mid,7],    # esoil
+             modlist[mid,8],    # qintf
+             modlist[mid,9])    # q_tdh
+  
+  res <- .C(  "fuseRoutingSimR",
+              as.double(U),
+              as.integer(length(U)),
+              as.integer(smodl),      # A (1d) array of ints (the model params)
+              as.integer(length(smodl)),
+              as.double(timedelay),
+              as.double(deltim),
+              X = double( length(U) ),
+              as.integer(length(U)),
+              status = integer(1), PACKAGE="fuse" )
+  
+  if (res$status != 0){
+    stop("fuseRoutingSimR Failed!")
+  }
+  
+  X <- res$X
+  attributes(X) <- inAttr
+  
+  return(X)
+  
 }
 
 
