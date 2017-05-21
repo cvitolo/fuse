@@ -18,4 +18,3 @@ fusesma.ranges()
 }
 
 }
-

@@ -68,4 +68,3 @@ modliststring[5,]
 \details{
 Data set: modliststring
 }
-

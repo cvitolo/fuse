@@ -5,7 +5,8 @@ Authors@R: c(person("Claudia", "Vitolo", role = c("aut", "cre"),
                     email = "cvitolodev@gmail.com"),
 	           person("Peter", "Wells", role = "ctr"),
 	           person("Martin", "Dobias", role = "ctr"),
-	           person("Wouter", "Buytaert", role = "ths"))
+	           person("Wouter", "Buytaert", role = "ths"),
+	           person("Maëlle", "Salmon", role = c("ctb"), comment = "Maëlle Salmon reviewed the package and paper for the Journal of Open Source Software, see review here: https://github.com/openjournals/joss-reviews/issues/52"))
 Maintainer: Claudia Vitolo <cvitolodev@gmail.com>
 URL: https://github.com/cvitolo/fuse
 BugReports: https://github.com/cvitolo/fuse/issues
@@ -18,7 +19,8 @@ Description: Implementation of the framework for hydrological modelling FUSE,
 Depends: R (>= 3.0.0)
 Imports: dplyr, zoo, tgp, stats, utils
 LinkingTo: BH, Rcpp
-Suggests: testthat
+Suggests: qualV, testthat, knitr
+VignetteBuilder: knitr
 Encoding: UTF-8
 License: GPL-3
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1

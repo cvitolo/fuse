@@ -70,4 +70,3 @@ modlist[5,]
 \details{
 Data set: modlist
 }
-

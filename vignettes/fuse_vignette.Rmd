@@ -1,9 +1,11 @@
 ---
-title: 'fuse: Framework for Understanding Structural Errors'
 author: "Claudia Vitolo"
-date: "8 August 2016"
-output:
-  pdf_document: default
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteEngine{knitr::knitr}
+  %\VignetteIndexEntry{fuse: Framework for Understanding Structural Errors}
+  %\usepackage[UTF-8]{inputenc}
 ---
 
 ```{r echo=FALSE}

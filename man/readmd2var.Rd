@@ -25,4 +25,3 @@ readmd2var(mid = 5, number = TRUE)
 }
 
 }
-

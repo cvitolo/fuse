@@ -4,6 +4,7 @@
 \name{fuse}
 \alias{fuse}
 \alias{fuse-package}
+\alias{fuse}
 \title{fuse: Framework for Understanding Structural Errors}
 \usage{
 fuse(DATA, mid, deltim, ParameterSet)
@@ -38,4 +39,3 @@ Q <- fuse(fuse_hydrological_timeseries, 60, 1, parameters)
 }
 
 }
-

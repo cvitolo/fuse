@@ -19,4 +19,3 @@ plot(fuse_hydrological_timeseries)
 
 }
 \keyword{datasets}
-

@@ -19,7 +19,7 @@ The fuse package, as well as the examples in the vignette, depend on a number of
 
 ``` r
 packs <- c("dplyr", "zoo", "tgp", "stats", "utils", "BH", "Rcpp", "testthat",
-           devtools")
+           "qualV", "devtools")
 new.packages <- packs[!(packs %in% installed.packages()[, "Package"])]
 if(length(new.packages)) install.packages(new.packages)
 ```
