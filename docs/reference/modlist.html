@@ -25,12 +25,14 @@
 <script src="../pkgdown.js"></script>
 
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
   </head>
 
   <body>
@@ -93,112 +95,58 @@
     </div>
 
     
-    <p>This object contains the list of FUSE model structures implemented by Clark et al. (2011). This is available as numerical codes (<code>modlist</code>) or strings (<code>modliststring</code>). The variables are as follows:
-<ul>
-<li> mid = model id number
-  </li>
-<li> rferr = type of rainfall error
-  </li>
-<li> arch1 = architecture of the upper soil layer
-  </li>
-<li> arch2 = architecture of the lower soil layer
-  </li>
-<li> qsurf = surface runoff
-  </li>
-<li> qperc = vertical drainage
-  </li>
-<li> esoil = evapotranspiration
-  </li>
-<li> qintf = interflow
-  </li>
-<li> q_tdh = routing
-</li>
-</ul></p>
-
-    <p>Each row identifies a model structure and each column identifies a different element of the model structure. For each element of the model structure, several model decisions can be made (see Clark et al. 2011 for details):
-<ul>
-<li> Rainfall error (rferr) <ul>
-<li> additive_e (additive rainfall error) = <strong>11</strong>
-      </li>
-<li> multiplc_e (multiplicative rainfall error) = <strong>12</strong>
-      </li>
-</ul></p>
-
-    <p></li>
-<li> Architecture of the upper soil layer (arch1) <ul>
-<li> onestate_1 (Single state: upper layer defined by a single state variable) = <strong>21</strong>
-      </li>
-<li> tension1_1 (Separate tension storage: upper layer broken up into tension and free storage) = <strong>22</strong>
-      </li>
-<li> tension2_1 (Cascading buckets: tension storage sub-divided into recharge and excess) = <strong>23</strong>
-      </li>
-</ul></p>
-
-    <p></li>
-<li> Architecture of the lower soil layer (arch2) <ul>
-<li> fixedsiz_2 (baseflow reservoir of fixed size) = <strong>31</strong>
-      </li>
-<li> tens2pll_2 (tension reservoir plus two parallel tanks) = <strong>32</strong>
-      </li>
-<li> unlimfrc_2 (baseflow reservoir of unlimited size (0-HUGE), frac rate) = <strong>33</strong>
-      </li>
-<li> unlimpow_2 (baseflow reservoir of unlimited size (0-HUGE), power recession) = <strong>34</strong>
-      <!-- %% \item topmdexp_2 (topmodel exponential reservoir (no more in the list) = \strong{35} -->
-   </li>
-</ul></p>
-
-    <p></li>
-<li> Runoff (qsurf) <ul>
-<li> arno_x_vic (Unsaturated zone Pareto: ARNO/Xzang/VIC parameterization (upper zone control)) = <strong>41</strong>
-       </li>
-<li> prms_varnt (Unsaturated zone linear: PRMS variant (fraction of upper tension storage)) = <strong>42</strong>
-       </li>
-<li> tmdl_param (Saturated zone topographic: TOPMODEL parameterization (only valid for TOPMODEL qb)) = <strong>43</strong>
-       </li>
-</ul></p>
-
-    <p></li>
-<li> Percolation (qperc) <ul>
-<li> perc_f2sat (Drainage above field capacity: water from (field cap to sat) avail for percolation) = <strong>51</strong>
-       </li>
-<li> perc_lower (Gravity drainage: percolation defined by moisture content in lower layer (SAC)) = <strong>52</strong>
-       </li>
-<li> perc_w2sat (Saturated zone control: water from wilt point to saturation is available for percolation) = <strong>53</strong>
-       </li>
-</ul></p>
-
-    <p></li>
-<li> Evaporation (esoil) <ul>
-<li> rootweight (root weighting) = <strong>61</strong>
-      </li>
-<li> sequential (sequential evaporation model) = <strong>62</strong>
-   </li>
-</ul></p>
-
-    <p></li>
-<li> Interflows (qintf) <ul>
-<li> intflwnone (interflow denied) = <strong>71</strong>
-       </li>
-<li> intflwsome (interflow allowed) = <strong>72</strong>
-   </li>
-</ul></p>
-
-    <p></li>
-<li> Routing (q_tdh) <ul>
-<li> no_routing (routing denied) = <strong>81</strong>
-       </li>
-<li> rout_gamma (routing allowed using Gamma distribution with shape parameter = 2.5) = <strong>82</strong>
-       </li>
-</ul></p>
-
-    <p></li>
-</ul></p>
-
-    <p>The function <code>readmd()</code> returns the model components corresponding to a given id. A similar function (<code>readmd2var()</code>) reads the components as either character or numeric vector.</p>
-
-    <p>On Clark&#39;s model list, the parent models (Topmodel, VIC, PRMS and Sacramento) have id = 60, 230, 342 and 426 respectively.</p>
-
-    <p>For example, model 5 is identified by the following numeric codes:
+    <p>This object contains the list of FUSE model structures implemented by Clark et al. (2011). This is available as numerical codes (<code>modlist</code>) or strings (<code>modliststring</code>). The variables are as follows:</p><ul>
+<li><p>mid = model id number</p></li>
+<li><p>rferr = type of rainfall error</p></li>
+<li><p>arch1 = architecture of the upper soil layer</p></li>
+<li><p>arch2 = architecture of the lower soil layer</p></li>
+<li><p>qsurf = surface runoff</p></li>
+<li><p>qperc = vertical drainage</p></li>
+<li><p>esoil = evapotranspiration</p></li>
+<li><p>qintf = interflow</p></li>
+<li><p>q_tdh = routing</p></li>
+</ul><p>Each row identifies a model structure and each column identifies a different element of the model structure. For each element of the model structure, several model decisions can be made (see Clark et al. 2011 for details):</p><ul>
+<li><p>Rainfall error (rferr)</p><ul>
+<li><p>additive_e (additive rainfall error) = <strong>11</strong></p></li>
+<li><p>multiplc_e (multiplicative rainfall error) = <strong>12</strong></p></li>
+</ul></li>
+<li><p>Architecture of the upper soil layer (arch1)</p><ul>
+<li><p>onestate_1 (Single state: upper layer defined by a single state variable) = <strong>21</strong></p></li>
+<li><p>tension1_1 (Separate tension storage: upper layer broken up into tension and free storage) = <strong>22</strong></p></li>
+<li><p>tension2_1 (Cascading buckets: tension storage sub-divided into recharge and excess) = <strong>23</strong></p></li>
+</ul></li>
+<li><p>Architecture of the lower soil layer (arch2)</p><ul>
+<li><p>fixedsiz_2 (baseflow reservoir of fixed size) = <strong>31</strong></p></li>
+<li><p>tens2pll_2 (tension reservoir plus two parallel tanks) = <strong>32</strong></p></li>
+<li><p>unlimfrc_2 (baseflow reservoir of unlimited size (0-HUGE), frac rate) = <strong>33</strong></p></li>
+<li><p>unlimpow_2 (baseflow reservoir of unlimited size (0-HUGE), power recession) = <strong>34</strong>
+      <!-- %% \item topmdexp_2 (topmodel exponential reservoir (no more in the list) = \strong{35} --></p></li>
+</ul></li>
+<li><p>Runoff (qsurf)</p><ul>
+<li><p>arno_x_vic (Unsaturated zone Pareto: ARNO/Xzang/VIC parameterization (upper zone control)) = <strong>41</strong></p></li>
+<li><p>prms_varnt (Unsaturated zone linear: PRMS variant (fraction of upper tension storage)) = <strong>42</strong></p></li>
+<li><p>tmdl_param (Saturated zone topographic: TOPMODEL parameterization (only valid for TOPMODEL qb)) = <strong>43</strong></p></li>
+</ul></li>
+<li><p>Percolation (qperc)</p><ul>
+<li><p>perc_f2sat (Drainage above field capacity: water from (field cap to sat) avail for percolation) = <strong>51</strong></p></li>
+<li><p>perc_lower (Gravity drainage: percolation defined by moisture content in lower layer (SAC)) = <strong>52</strong></p></li>
+<li><p>perc_w2sat (Saturated zone control: water from wilt point to saturation is available for percolation) = <strong>53</strong></p></li>
+</ul></li>
+<li><p>Evaporation (esoil)</p><ul>
+<li><p>rootweight (root weighting) = <strong>61</strong></p></li>
+<li><p>sequential (sequential evaporation model) = <strong>62</strong></p></li>
+</ul></li>
+<li><p>Interflows (qintf)</p><ul>
+<li><p>intflwnone (interflow denied) = <strong>71</strong></p></li>
+<li><p>intflwsome (interflow allowed) = <strong>72</strong></p></li>
+</ul></li>
+<li><p>Routing (q_tdh)</p><ul>
+<li><p>no_routing (routing denied) = <strong>81</strong></p></li>
+<li><p>rout_gamma (routing allowed using Gamma distribution with shape parameter = 2.5) = <strong>82</strong></p></li>
+</ul></li>
+</ul><p>The function <code>readmd()</code> returns the model components corresponding to a given id. A similar function (<code>readmd2var()</code>) reads the components as either character or numeric vector.</p>
+<p>On Clark's model list, the parent models (Topmodel, VIC, PRMS and Sacramento) have id = 60, 230, 342 and 426 respectively.</p>
+<p>For example, model 5 is identified by the following numeric codes:
 data(modlist)
 modlist[5,]</p>
     

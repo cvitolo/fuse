@@ -25,12 +25,14 @@
 <script src="../pkgdown.js"></script>
 
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
   </head>
 
   <body>
@@ -94,24 +96,32 @@
 
     
     <p>Implementation of the framework for hydrological modelling FUSE, based on the Fortran version described in Clark et al. (2008). The package consists of two modules: Soil Moisture Accounting module (<code>fuse.sim</code>) and Gamma routing module (<code>routgamma.sim</code>). It also contains default parameter ranges (see <code>fuse.ranges</code> and <code>routgamma.ranges</code>) and three data objects: fuse_hydrological_timeseries, parameters and modlist.</p>
-
-    <p>Combine FUSE soil moisture accounting module and routing module in one function</p>
+<p>Combine FUSE soil moisture accounting module and routing module in one function</p>
     
 
-    <pre><span class='fu'>fuse</span>(<span class='no'>DATA</span>, <span class='no'>mid</span>, <span class='no'>deltim</span>, <span class='no'>ParameterSet</span>)</pre>
+    <pre class="usage"><span class='fu'>fuse</span>(<span class='no'>DATA</span>, <span class='no'>mid</span>, <span class='no'>deltim</span>, <span class='no'>ParameterSet</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <dl class="dl-horizontal">
-      <dt>DATA</dt>
-      <dd>data.frame containing observations. It consists of 3 columns:
-Rainfall (P), Potential Evapo-Transpiration (E) and Streamflow (Q)</dd>
-      <dt>mid</dt>
-      <dd>model id number in Model List 2011(see below for details)</dd>
-      <dt>deltim</dt>
-      <dd>observation time step (days)</dd>
-      <dt>ParameterSet</dt>
-      <dd>list of parameters</dd>
-    </dl>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>DATA</th>
+      <td><p>data.frame containing observations. It consists of 3 columns:
+Rainfall (P), Potential Evapo-Transpiration (E) and Streamflow (Q)</p></td>
+    </tr>
+    <tr>
+      <th>mid</th>
+      <td><p>model id number in Model List 2011(see below for details)</p></td>
+    </tr>
+    <tr>
+      <th>deltim</th>
+      <td><p>observation time step (days)</p></td>
+    </tr>
+    <tr>
+      <th>ParameterSet</th>
+      <td><p>list of parameters</p></td>
+    </tr>
+    </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
@@ -123,12 +133,12 @@ Rainfall (P), Potential Evapo-Transpiration (E) and Streamflow (Q)</dd>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>## Not run: ------------------------------------</span>
-<span class='co'># data(fuse_hydrological_timeseries)</span>
-<span class='co'># set.seed(123)</span>
-<span class='co'># parameters &lt;- generateParameters(1)</span>
-<span class='co'># Q &lt;- fuse(fuse_hydrological_timeseries, 60, 1, parameters)</span>
-<span class='co'>## ---------------------------------------------</span></div></pre>
+    <pre class="examples"><div class='input'><span class='fu'>not_run</span>({
+  <span class='fu'>data</span>(<span class='no'>fuse_hydrological_timeseries</span>)
+  <span class='fu'>set.seed</span>(<span class='fl'>123</span>)
+  <span class='no'>parameters</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='generateParameters.html'>generateParameters</a></span>(<span class='fl'>1</span>)
+  <span class='no'>Q</span> <span class='kw'>&lt;-</span> <span class='fu'>fuse</span>(<span class='no'>fuse_hydrological_timeseries</span>, <span class='fl'>60</span>, <span class='fl'>1</span>, <span class='no'>parameters</span>)
+})</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

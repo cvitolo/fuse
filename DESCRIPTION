@@ -21,5 +21,4 @@ LinkingTo: BH, Rcpp
 Suggests: testthat
 Encoding: UTF-8
 License: GPL-3
-Repository: GitHub
 RoxygenNote: 5.0.1

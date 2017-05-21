@@ -25,12 +25,14 @@
 <script src="../pkgdown.js"></script>
 
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
   </head>
 
   <body>
@@ -89,91 +91,130 @@
       <div class="row">
   <div class="col-md-9">
     <div class="page-header">
-      <h1>Function reference</h1>
-      <h4>version&nbsp;3.2</h4>
+      <h1>
+        Reference
+        <small>version&nbsp;3.2</small>
+      </h1>
     </div>
 
     <div class="contents">
-      <h2 id="section-core-functions" class="hasAnchor"><a href="#section-core-functions" class="anchor"></a>Core functions</h2>
-      <p class="section-desc"><p>The soil moisture accounting module, the routing module, default parameter ranges and the wrapper function.</p></p>
+      <table class="ref-index">
 
-      
-      <p><a href="fuse.html">fuse: Framework for Understanding Structural Errors</a></p>
-      <ul>
-        <li><code><a href="fuse.html">fuse</a></code></li><li><code><a href="fuse.html">fuse-package</a></code></li>
-      </ul>
-      
-      <p><a href="fuserouting.ranges.html">Function to define the parameter ranges for GAMMA routing module</a></p>
-      <ul>
-        <li><code><a href="fuserouting.ranges.html">fuserouting.ranges</a></code></li>
-      </ul>
-      
-      <p><a href="fuserouting.sim.html">FUSE Routing model</a></p>
-      <ul>
-        <li><code><a href="fuserouting.sim.html">fuserouting.sim</a></code></li>
-      </ul>
-      
-      <p><a href="fusesma.ranges.html">Function to define the parameter ranges for FUSE Soil Moisture Accounting module</a></p>
-      <ul>
-        <li><code><a href="fusesma.ranges.html">fusesma.ranges</a></code></li>
-      </ul>
-      
-      <p><a href="fusesma.sim.html">FUSE Soil Moisture Accounting model</a></p>
-      <ul>
-        <li><code><a href="fusesma.sim.html">fusesma.sim</a></code></li>
-      </ul>
-          <h2 id="section-utility-functions" class="hasAnchor"><a href="#section-utility-functions" class="anchor"></a>Utility functions</h2>
-      <p class="section-desc"><p>Functions to explore model structure variability.</p></p>
+      <colgroup>
+        <col class="alias" />
+        <col class="title" />
+      </colgroup>
 
-      
-      <p><a href="fuseInfo.html">Generate information on model structure components and parameter values</a></p>
-      <ul>
-        <li><code><a href="fuseInfo.html">fuseInfo</a></code></li>
-      </ul>
-      
-      <p><a href="generateParameters.html">This function generates parameter sets for FUSE models (see ranges suggested by Clark et al., 2011).</a></p>
-      <ul>
-        <li><code><a href="generateParameters.html">generateParameters</a></code></li>
-      </ul>
-      
-      <p><a href="model_param_table.html">Prepare a table containing Model ID numbers, model options and parameter in use.</a></p>
-      <ul>
-        <li><code><a href="model_param_table.html">model_param_table</a></code></li>
-      </ul>
-      
-      <p><a href="readmd2var.html">Read Model Decisions</a></p>
-      <ul>
-        <li><code><a href="readmd2var.html">readmd2var</a></code></li>
-      </ul>
-      
-      <p><a href="readmd.html">Read Model Decisions</a></p>
-      <ul>
-        <li><code><a href="readmd.html">readmd</a></code></li>
-      </ul>
-          <h2 id="section-sample-data-and-look-up-tables" class="hasAnchor"><a href="#section-sample-data-and-look-up-tables" class="anchor"></a>Sample data and look-up tables</h2>
-      <p class="section-desc"><p>Sample daily data and parameter set to run tests in the vignette and README file.</p></p>
-
-      
-      <p><a href="fuse_hydrological_timeseries.html">FUSE dummy dataset</a></p>
-      <ul>
-        <li><code><a href="fuse_hydrological_timeseries.html">fuse_hydrological_timeseries</a></code></li>
-      </ul>
-      
-      <p><a href="fuse_parameters.html">FUSE dummy parameters</a></p>
-      <ul>
-        <li><code><a href="fuse_parameters.html">fuse_parameters</a></code></li>
-      </ul>
-      
-      <p><a href="modlist.html">FUSE model structures (numeric)</a></p>
-      <ul>
-        <li><code><a href="modlist.html">modlist</a></code></li>
-      </ul>
-      
-      <p><a href="modliststring.html">FUSE model structures (string)</a></p>
-      <ul>
-        <li><code><a href="modliststring.html">modliststring</a></code></li>
-      </ul>
-    
+      <tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-core-functions" class="hasAnchor"><a href="#section-core-functions" class="anchor"></a>Core functions</h2>
+            <p class="section-desc"><p>The soil moisture accounting module, the routing module, default parameter ranges and the wrapper function.</p></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="fuse.html">fuse</a></code> </p>
+          </td>
+          <td><p>fuse: Framework for Understanding Structural Errors</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="fuserouting.ranges.html">fuserouting.ranges</a></code> </p>
+          </td>
+          <td><p>Function to define the parameter ranges for GAMMA routing module</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="fuserouting.sim.html">fuserouting.sim</a></code> </p>
+          </td>
+          <td><p>FUSE Routing model</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="fusesma.ranges.html">fusesma.ranges</a></code> </p>
+          </td>
+          <td><p>Function to define the parameter ranges for FUSE Soil Moisture Accounting module</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="fusesma.sim.html">fusesma.sim</a></code> </p>
+          </td>
+          <td><p>FUSE Soil Moisture Accounting model</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-utility-functions" class="hasAnchor"><a href="#section-utility-functions" class="anchor"></a>Utility functions</h2>
+            <p class="section-desc"><p>Functions to explore model structure variability.</p></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="fuseInfo.html">fuseInfo</a></code> </p>
+          </td>
+          <td><p>Generate information on model structure components and parameter values</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="generateParameters.html">generateParameters</a></code> </p>
+          </td>
+          <td><p>This function generates parameter sets for FUSE models (see ranges suggested by Clark et al., 2011).</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="model_param_table.html">model_param_table</a></code> </p>
+          </td>
+          <td><p>Prepare a table containing Model ID numbers, model options and parameter in use.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="readmd2var.html">readmd2var</a></code> </p>
+          </td>
+          <td><p>Read Model Decisions</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="readmd.html">readmd</a></code> </p>
+          </td>
+          <td><p>Read Model Decisions</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-sample-data-and-look-up-tables" class="hasAnchor"><a href="#section-sample-data-and-look-up-tables" class="anchor"></a>Sample data and look-up tables</h2>
+            <p class="section-desc"><p>Sample daily data and parameter set to run tests in the vignette and README file.</p></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="fuse_hydrological_timeseries.html">fuse_hydrological_timeseries</a></code> </p>
+          </td>
+          <td><p>FUSE dummy dataset</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="fuse_parameters.html">fuse_parameters</a></code> </p>
+          </td>
+          <td><p>FUSE dummy parameters</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="modlist.html">modlist</a></code> </p>
+          </td>
+          <td><p>FUSE model structures (numeric)</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="modliststring.html">modliststring</a></code> </p>
+          </td>
+          <td><p>FUSE model structures (string)</p></td>
+        </tr>
+      </tbody>
+      </table>
     </div>
   </div>
 

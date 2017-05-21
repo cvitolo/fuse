@@ -19,7 +19,7 @@ The fuse package, as well as the examples in the vignette, depend on a number of
 
 ``` r
 packs <- c("dplyr", "zoo", "tgp", "stats", "utils", "BH", "Rcpp", "testthat",
-           "qualV", "devtools")
+           devtools")
 new.packages <- packs[!(packs %in% installed.packages()[, "Package"])]
 if(length(new.packages)) install.packages(new.packages)
 ```
@@ -49,8 +49,8 @@ data(fuse_hydrological_timeseries)
 # Sample the parameter range
 parameters <- generateParameters(1)
 
-# Run fuse 
-streamflow <- fuse(DATA = fuse_hydrological_timeseries, 
+# Run fuse
+streamflow <- fuse(DATA = fuse_hydrological_timeseries,
                    mid = 60,       # Model structure = TOPMODEL
                    deltim = 1,     # Daily time step
                    ParameterSet = parameters)
