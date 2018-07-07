@@ -22,6 +22,16 @@
 #'
 
 fuse <- function(DATA, mid, deltim, ParameterSet){
+  
+  # Check parameter names are correct
+  pnames <- c("rferr_add", "rferr_mlt", "maxwatr_1", "maxwatr_2", "fracten",
+              "frchzne", "fprimqb", "rtfrac1", "percrte", "percexp", "sacpmlt",
+              "sacpexp", "percfrac", "iflwrte", "baserte", "qb_powr", "qb_prms",
+              "qbrate_2a", "qbrate_2b", "sareamax", "axv_bexp", "loglamb",
+              "tishape", "timedelay")
+  if (all(names(ParameterSet) != pnames)){
+    stop("The parameter set has incorrect names, please correct and re-try.")
+  }
 
   U <- fusesma.sim(DATA,
                    mid,
