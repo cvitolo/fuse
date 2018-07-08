@@ -31,7 +31,9 @@ The fuse package, as well as the examples in this vignette, depend on a number o
 packs <- c("dplyr", "zoo", "tgp", "stats", "utils", "BH", "Rcpp", "testthat",
            "qualV", "devtools")
 new.packages <- packs[!(packs %in% installed.packages()[, "Package"])]
-if(length(new.packages)) install.packages(new.packages)
+if(length(new.packages)) {
+  install.packages(new.packages, repos = "https://cran.ma.imperial.ac.uk/")
+}
 ```
 
 ### Installation
