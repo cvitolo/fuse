@@ -4,9 +4,10 @@
 \alias{generateParameters}
 \title{This function generates parameter sets for FUSE models (see ranges suggested by Clark et al., 2011).}
 \usage{
-generateParameters(NumberOfRuns, SamplingType = "LHS", rferr_add = NULL,
-  rferr_mlt = NULL, frchzne = NULL, fracten = NULL, maxwatr_1 = NULL,
-  percfrac = NULL, fprimqb = NULL, qbrate_2a = NULL, qbrate_2b = NULL,
+generateParameters(NumberOfRuns, SamplingType = "LHS",
+  rferr_add = NULL, rferr_mlt = NULL, frchzne = NULL,
+  fracten = NULL, maxwatr_1 = NULL, percfrac = NULL,
+  fprimqb = NULL, qbrate_2a = NULL, qbrate_2b = NULL,
   qb_prms = NULL, maxwatr_2 = NULL, baserte = NULL, rtfrac1 = NULL,
   percrte = NULL, percexp = NULL, sacpmlt = NULL, sacpexp = NULL,
   iflwrte = NULL, axv_bexp = NULL, sareamax = NULL, loglamb = NULL,

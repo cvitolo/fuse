@@ -64,7 +64,7 @@ names(DefaultRanges) <- c("Min", "Max")
 Sample parameter set using Latin Hypercube method
 ```{r, eval = FALSE}
 numberOfRuns <- 100
-parameters <- lhs( numberOfRuns, as.matrix(DefaultRanges) )
+parameters <- tgp::lhs( numberOfRuns, as.matrix(DefaultRanges) )
 parameters <- data.frame(parameters)
 names(parameters) <- row.names(DefaultRanges)
 ```
@@ -82,14 +82,14 @@ myMID <- 60
 ```
 
 Use the built-in function to run FUSE for the 1st sampled parameter set
-```{r}
+```{r, fig.width = 7}
 streamflow <- fuse(fuse_hydrological_timeseries, myMID, myDELTIM, parameters[1,])
 
 plot(streamflow, xlab = "", ylab = "Streamflow [mm/day]")
 ```
 
 Run FUSE for all the sampled parameter sets 
-```{r}
+```{r, fig.width = 7}
 plot(fuse_hydrological_timeseries$Q, type = "l", 
      xlab = "", ylab = "Streamflow [mm/day]")
 
@@ -139,7 +139,7 @@ for (m in 1:4){
 ```
 
 Compare results
-```{r}
+```{r, fig.width = 7}
 bestRun <- which(indices == max(indices))
 numberOfRuns <- dim(parameters)[1]
 
@@ -176,7 +176,7 @@ lines(discharges[, bestRun], col = "red", lwd = 1)
 ```
 
 How the best simulation of each model structure compare to each other?
-```{r} 
+```{r, fig.width = 7, fig.height = 7}
 bestRun0060 <- which(indices[1:numberOfRuns] == max(indices[1:numberOfRuns]))
 
 bestRun0230 <- numberOfRuns + 
@@ -206,7 +206,7 @@ legend("top",
 
 # Use fuse with hydromad
 
-[Hydromad](http://hydromad.catchment.org/) is an excellent framework for hydrological modelling, optimization, sensitivity analysis and assessment of results. It contains a large set of soil moisture accounting modules and routing functions. Thanks to Joseph Guillaume (hydromad’s maintainer), fuse is now compatible with hydromad and below are some examples Joseph provided to use fuse within the hydromad environment.
+[Hydromad](http://hydromad.catchment.org/) is an excellent framework for hydrological modelling, optimization, sensitivity analysis and assessment of results. It contains a large set of soil moisture accounting modules and routing functions. Thanks to Joseph Guillaume (hydromad's maintainer), fuse is now compatible with hydromad and below are some examples Joseph provided to use fuse within the hydromad environment.
 
 ```{r, eval = FALSE}
 # Install and load hydromad
