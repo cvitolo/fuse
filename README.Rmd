@@ -1,7 +1,22 @@
+---
+output: github_document
+---
 
-<!-- Edit the README.Rmd only!!! The README.md is generated automatically from README.Rmd. -->
+<!-- Edit the README.Rmd only!!! The README.md is generated automatically. -->
+
+```{r echo=FALSE}
+knitr::opts_chunk$set(
+  comment = '#>',
+  collapse = TRUE,
+  warning = FALSE,
+  message = FALSE,
+  eval = FALSE,
+  cache = FALSE
+)
+```
+
 fuse: an R package implementing the Framework for Understanding Structural Errors
----------------------------------------------------------------------------------
+=================================================================================
 
 [![DOI](https://zenodo.org/badge/67341718.svg)](https://zenodo.org/badge/latestdoi/67341718) [![status](http://joss.theoj.org/papers/392a55daada04a86f95eaa8da134a28d/status.svg)](http://joss.theoj.org/papers/392a55daada04a86f95eaa8da134a28d)
 
@@ -17,7 +32,7 @@ This package is a re-implementation of the framework described in Clark et al. (
 
 The fuse package, as well as the examples in the vignette, depend on a number of CRAN packages. Check for missing dependencies and install them:
 
-``` r
+```{r}
 packs <- c("dplyr", "zoo", "tgp", "stats", "utils", "BH", "Rcpp", "testthat",
            "qualV", "devtools")
 new.packages <- packs[!(packs %in% installed.packages()[, "Package"])]
@@ -28,13 +43,13 @@ if(length(new.packages)) install.packages(new.packages)
 
 You can install this package from Github with [devtools](https://github.com/hadley/devtools):
 
-``` r
+```{r}
 devtools::install_github("cvitolo/fuse")
 ```
 
 Load the package:
 
-``` r
+```{r}
 library("fuse")
 ```
 
@@ -42,7 +57,7 @@ library("fuse")
 
 The simplest way to test `fuse` is to use the dummy data provided with this package, sample the parameter range using the built-in function `generateParameters()` and run the model with 1 model structure (e.g. TOPMODEL):
 
-``` r
+```{r}
 # Load the dummy data
 data(fuse_hydrological_timeseries)
 
@@ -57,8 +72,6 @@ streamflow <- fuse(DATA = fuse_hydrological_timeseries,
 
 plot(streamflow, xlab = "", ylab = "Streamflow [mm/day]")
 ```
-
-![](README_files/figure-markdown_github/example-1.png)
 
 For details and more complex examples (e.g. multi-model ensemble), please refer to the [vignette](https://cvitolo.github.io/fuse/articles/fuse_vignette.html).
 
