@@ -22,7 +22,8 @@ Description: Implementation of the framework for hydrological modelling FUSE,
 Depends: R (>= 3.0.0)
 Imports: dplyr, zoo, tgp, stats, utils
 LinkingTo: BH, Rcpp
-Suggests: qualV, testthat, knitr, pkgdown
+Suggests: qualV, testthat, knitr, pkgdown,
+    rmarkdown
 VignetteBuilder: knitr
 Encoding: UTF-8
 License: GPL-3

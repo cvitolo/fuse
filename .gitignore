@@ -4,47 +4,36 @@
 
 # Session Data files
 .RData
-
 # Example code in package build process
 *-Ex.R
-
 # Output files from R CMD build
 /*.tar.gz
-
 # Output files from R CMD check
 /*.Rcheck/
-
 # RStudio files
 .Rproj.user/
-
 # produced vignettes
 vignettes/*.html
 vignettes/*.pdf
-
 # OAuth2 token, see https://github.com/hadley/httr/releases/tag/v0.3
 .httr-oauth
-
 # knitr and R markdown default cache directories
 /*_cache/
 /cache/
-
 # Temporary files created by R markdown
 *.utf8.md
 *.knit.md
 .Rproj.user
-
 # Old and obsolete test files
 /old/
-
 # Shared libraries
 src/fuse.o
 src/fuse.so
 src/modelStructure.o
-
 # Others
 fuse.Rproj
 README.html
 ISSUES
-
 # Remove docs folder (site builds automatically)
 docs/*
+inst/doc
