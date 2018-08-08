@@ -46,3 +46,5 @@ fuse.Rproj
 README.html
 ISSUES
 
+# Remove docs folder (site builds automatically)
+docs/*
