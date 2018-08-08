@@ -2,14 +2,10 @@
 ^\.Rproj\.user$
 
 README.Rmd
-README_cache
-preparePackage.R
 ^appveyor\.yml$
 .travis.yml
 paper
 ^CONDUCT\.md$
-README_files
-_config.yml
-_pkgdown.yml
 docs
-ISSUES
+^_pkgdown\.yml$
+^docs$
