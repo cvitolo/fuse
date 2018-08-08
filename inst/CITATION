@@ -2,7 +2,6 @@ citHeader("To cite the 'fuse' package in publications, please use:")
 
 citEntry(entry = "manual",
   doi = "10.21105/joss.00052",
-  url = "http://dx.doi.org/10.21105/joss.00052",
   year  = "2016",
   month = "12",
   publisher = "The Open Journal",
