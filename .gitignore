@@ -36,4 +36,3 @@ README.html
 ISSUES
 # Remove docs folder (site builds automatically)
 docs/*
-inst/doc

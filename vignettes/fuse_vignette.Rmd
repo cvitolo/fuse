@@ -39,7 +39,7 @@ if(length(new.packages)) {
 
 ### Installation
 You can install this package from Github with [devtools](https://github.com/hadley/devtools):
-```{r, eval = FALSE}
+```{r}
 devtools::install_github("cvitolo/fuse")
 ```
 
